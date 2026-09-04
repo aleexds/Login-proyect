@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import AdminPanel from './pages/AdminPanel';
+import AdminLayout from './pages/Admin/AdminLayout';
 
 // Datos iniciales tomados de db.json para funcionamiento autónomo e integrado
 const INITIAL_USERS = [
@@ -133,50 +133,37 @@ export default function App() {
             onCancelReservation={handleCancelReservation}
           />
         )}
+      </main>
 
-        {activeTab === 'admin' && (
-          <AdminPanel 
+      {/* Admin Layout is handled differently because it needs full screen */}
+      {activeTab === 'admin' && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999 }}>
+          <AdminLayout 
+            currentUser={currentUser}
+            onLogout={() => setCurrentUser(null)}
             reservations={reservations}
             onUpdateStatus={handleUpdateStatus}
             onDeleteReservation={handleDeleteReservation}
             menu={menu}
             onAddMenuItem={handleAddMenuItem}
+            onGoToWebsite={() => setActiveTab('home')}
           />
-        )}
+        </div>
+      )}
 
-        {activeTab === 'login' && (
-          <div style={{ maxWidth: '400px', margin: '4rem auto', padding: '2rem', background: '#202632', borderRadius: '12px', border: '1px solid #2e384d', textAlign: 'center' }}>
-            <h2 style={{ marginBottom: '1rem', color: '#fff' }}>Acceso al Sistema</h2>
-            <p style={{ color: '#9ca3af', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-              Módulo asignado a <strong>Alex (feature/autenticacion)</strong>. Puedes seleccionar un rol en la barra superior para navegar como Admin o Cliente.
-            </p>
-            <button 
-              onClick={() => { setCurrentUser(INITIAL_USERS[1]); setActiveTab('dashboard'); }}
-              style={{ width: '100%', padding: '0.7rem', background: '#e65100', color: '#fff', borderRadius: '6px', fontWeight: 'bold', marginBottom: '0.8rem', cursor: 'pointer' }}
-            >
-              Entrar como Cliente Demo
-            </button>
-            <button 
-              onClick={() => { setCurrentUser(INITIAL_USERS[0]); setActiveTab('admin'); }}
-              style={{ width: '100%', padding: '0.7rem', background: '#2e7d32', color: '#fff', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              Entrar como Administrador
-            </button>
-          </div>
-        )}
-      </main>
-
-      <footer style={{
-        background: '#0a0c0f',
-        borderTop: '1px solid #1f2532',
-        padding: '2.5rem 1.5rem',
-        textAlign: 'center',
-        color: '#6b7280',
-        fontSize: '0.85rem'
-      }}>
-        <p>© 2026 <strong>Tacología</strong> · Restaurante de Comida Mexicana Premium.</p>
-        <p style={{ marginTop: '0.4rem', fontSize: '0.75rem' }}>Desarrollado en equipo por Ulysses, Alex, Kendall y Victor.</p>
-      </footer>
+      {activeTab !== 'admin' && (
+        <footer style={{
+          background: '#0a0c0f',
+          borderTop: '1px solid #1f2532',
+          padding: '2.5rem 1.5rem',
+          textAlign: 'center',
+          color: '#6b7280',
+          fontSize: '0.85rem'
+        }}>
+          <p>© 2026 <strong>Tacología</strong> · Restaurante de Comida Mexicana Premium.</p>
+          <p style={{ marginTop: '0.4rem', fontSize: '0.75rem' }}>Desarrollado en equipo por Ulysses, Alex, Kendall y Victor.</p>
+        </footer>
+      )}
     </div>
   );
 }
