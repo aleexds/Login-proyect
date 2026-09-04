@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg-dark: #0f1115;
+  --color-bg-surface: #181c24;
+  --color-bg-card: #202632;
+  --color-bg-card-hover: #262e3d;
+  --color-primary: #e65100; /* Terracota / Ámbar mexicano */
+  --color-primary-hover: #f57c00;
+  --color-accent: #d4af37; /* Oro / Maíz */
+  --color-agave: #2e7d32; /* Verde agave */
+  --color-text-main: #f3f4f6;
+  --color-text-muted: #9ca3af;
+  --color-border: #2e384d;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --transition-fast: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-main);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.tacologia-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.tacologia-main-content {
+  flex: 1;
+}
