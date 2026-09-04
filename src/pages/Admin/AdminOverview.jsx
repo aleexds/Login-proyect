@@ -45,7 +45,7 @@ export default function AdminOverview({ reservations = [], menu = [] }) {
           <div className="kpi-icon revenue">💰</div>
           <div className="kpi-info">
             <h3>Ingresos Proyectados</h3>
-            <p className="kpi-value">$24,500 MXN</p>
+            <p className="kpi-value">₡685,000</p>
           </div>
         </div>
       </div>

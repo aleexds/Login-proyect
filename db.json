@@ -59,7 +59,7 @@
       "name": "Taco de Rib Eye con Tuétano Asado",
       "category": "Especialidades",
       "description": "Corte prime en tortilla nixtamalizada a mano con sal de Colima y chimichurri serrano.",
-      "price": 280,
+      "price": 7500,
       "badge": "Insignia"
     },
     {
@@ -67,7 +67,7 @@
       "name": "Taco Gobernador Tacología",
       "category": "Del Mar",
       "description": "Camarón pacífico marinado en adobo de chiles secos, queso menonita fundido y aguacate criollo.",
-      "price": 240,
+      "price": 6200,
       "badge": "Popular"
     },
     {
@@ -75,7 +75,7 @@
       "name": "Lechón Confitado en Horno de Leña",
       "category": "Especialidades",
       "description": "Piel crujiente, cebolla morada encurtida al habanero y jugo concentrado de naranja agria.",
-      "price": 260,
+      "price": 6800,
       "badge": "Chef Choice"
     },
     {
@@ -83,7 +83,7 @@
       "name": "Tasting de Mezcales Artesanales",
       "category": "Bebidas",
       "description": "Selección de 3 mezcales oaxaqueños silvestres con sales de gusano y naranja criolla.",
-      "price": 320,
+      "price": 8500,
       "badge": "Exclusivo"
     }
   ],

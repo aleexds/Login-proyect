@@ -11,7 +11,7 @@ const DEFAULT_MENU = [
     name: "Taco de Rib Eye con Tuétano Asado",
     category: "Especialidades",
     description: "Corte prime en tortilla nixtamalizada a mano con sal de Colima y chimichurri serrano.",
-    price: 280,
+    price: 7500,
     badge: "Insignia"
   },
   {
@@ -19,7 +19,7 @@ const DEFAULT_MENU = [
     name: "Taco Gobernador Tacología",
     category: "Del Mar",
     description: "Camarón pacífico marinado en adobo de chiles secos, queso menonita fundido y aguacate criollo.",
-    price: 240,
+    price: 6200,
     badge: "Popular"
   },
   {
@@ -27,7 +27,7 @@ const DEFAULT_MENU = [
     name: "Lechón Confitado en Horno de Leña",
     category: "Especialidades",
     description: "Piel crujiente, cebolla morada encurtida al habanero y jugo concentrado de naranja agria.",
-    price: 260,
+    price: 6800,
     badge: "Chef Choice"
   },
   {
@@ -35,7 +35,7 @@ const DEFAULT_MENU = [
     name: "Tasting de Mezcales Artesanales",
     category: "Bebidas",
     description: "Selección de 3 mezcales oaxaqueños silvestres con sales de gusano y naranja criolla.",
-    price: 320,
+    price: 8500,
     badge: "Exclusivo"
   }
 ];
@@ -157,7 +157,7 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
               <div className="dish-body">
                 <div className="dish-top">
                   <h3 className="dish-name">{dish.name}</h3>
-                  <span className="dish-price">${dish.price} MXN</span>
+                  <span className="dish-price">₡{Number(dish.price).toLocaleString('es-CR')}</span>
                 </div>
                 <p className="dish-desc">{dish.description}</p>
                 <div className="dish-footer">
