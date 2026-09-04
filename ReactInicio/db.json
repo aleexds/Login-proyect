@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin Tacologia",
+      "email": "admin@tacologia.com",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Cliente Demo",
+      "email": "user@tacologia.com",
+      "password": "1234",
+      "role": "user"
+    }
+  ],
+  "reservations": [
+    {
+      "id": 1,
+      "userId": 2,
+      "name": "Cliente Demo",
+      "phone": "+52 55 1234 5678",
+      "date": "2026-09-10",
+      "time": "19:00",
+      "guests": 2,
+      "tableArea": "Terraza Agave",
+      "status": "confirmada",
+      "notes": "Mesa con vista y velada de aniversario"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "name": "Cliente Demo",
+      "phone": "+52 55 9876 5432",
+      "date": "2026-09-15",
+      "time": "21:00",
+      "guests": 4,
+      "tableArea": "Salón Mezcal",
+      "status": "pendiente",
+      "notes": "Cumpleaños, requieren menú degustación"
+    }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "name": "Taco de Rib Eye con Tuétano Asado",
+      "category": "Especialidades",
+      "description": "Corte prime en tortilla nixtamalizada a mano con sal de Colima y chimichurri serrano.",
+      "price": 280,
+      "badge": "Insignia"
+    },
+    {
+      "id": 2,
+      "name": "Taco Gobernador Tacología",
+      "category": "Del Mar",
+      "description": "Camarón pacífico marinado en adobo de chiles secos, queso menonita fundido y aguacate criollo.",
+      "price": 240,
+      "badge": "Popular"
+    },
+    {
+      "id": 3,
+      "name": "Lechón Confitado en Horno de Leña",
+      "category": "Especialidades",
+      "description": "Piel crujiente, cebolla morada encurtida al habanero y jugo concentrado de naranja agria.",
+      "price": 260,
+      "badge": "Chef Choice"
+    },
+    {
+      "id": 4,
+      "name": "Tasting de Mezcales Artesanales",
+      "category": "Bebidas",
+      "description": "Selección de 3 mezcales oaxaqueños silvestres con sales de gusano y naranja criolla.",
+      "price": 320,
+      "badge": "Exclusivo"
+    }
+  ]
+}
