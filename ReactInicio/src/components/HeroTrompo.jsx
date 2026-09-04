@@ -1,208 +1,209 @@
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import trompoImg from '../assets/trompo.jpg';
+import './HeroTrompo.css';
 
-/**
- * HeroTrompo — Sección hero inmersiva scroll-driven estilo agencia creativa.
- *
- * Arquitectura del scroll:
- *  - Contenedor exterior de 300vh → genera el "espacio de scroll" para la animación.
- *  - Contenedor interno sticky h-screen → mantiene el viewport fijo mientras se scrollea.
- *  - useScroll({ target, offset }) vincula el progreso del scroll (0→1) al contenedor.
- *
- * Animaciones sincronizadas al scroll:
- *  1. Trompo rota 1080° sobre eje Y (3 giros completos).
- *  2. Escala del trompo pulsa suavemente (0.7 → 1.1 → 0.85).
- *  3. Textos promocionales aparecen/desaparecen en secuencia:
- *     - Slide 1 (0%–33%): "TACOLOGÍA" + tagline de bienvenida.
- *     - Slide 2 (33%–66%): Frase gastronómica de impacto.
- *     - Slide 3 (66%–100%): CTA "Reserva tu experiencia".
- *
- * @author Victor — feature/inicio-ui
- */
+/* ─── Generador de chispas holográficas ─── */
+function generateSparks(count) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    left: 20 + Math.random() * 60,
+    size: 2 + Math.random() * 4,
+    delay: Math.random() * 3,
+    duration: 3 + Math.random() * 4,
+    drift: -100 + Math.random() * 200,
+    color: Math.random() > 0.5 ? '#00ffff' : '#ff00ff', // Cyan y magenta
+  }));
+}
+
 export default function HeroTrompo() {
   const containerRef = useRef(null);
+  const sparks = useMemo(() => generateSparks(50), []);
 
-  // Vincula el scroll al contenedor de 300vh
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  /* ─── Trompo transforms ─── */
-  const trompoRotateY = useTransform(scrollYProgress, [0, 1], [0, 1080]);
-  const trompoScale   = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.7, 1.1, 1.05, 0.85]);
-  const trompoBrightness = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.6, 1, 1, 0.5]);
+  // Escala global del trompo (se acerca dramáticamente al final)
+  const globalScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.3, 2.0]);
+  
+  // Parpadeo glitch holográfico intenso en puntos clave del scroll
+  const glitchOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.1, 0.15, 0.2, 0.4, 0.45, 0.5, 0.7, 0.75, 0.8, 1],
+    [0, 0,   0.9,  0,   0,   0.8,  0,   0,   1,    0,   0.6]
+  );
 
-  /* ─── Glow pulse (resplandor naranja detrás del trompo) ─── */
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0.1, 0.5, 0.7, 0.5, 0.1]);
-  const glowScale   = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.3, 0.9]);
+  // ════ ANIMACIONES DE LOS CORTES (SLICES) ════
+  // Se separan en los ejes Y y X, y rotan sutilmente
+  const s1Y = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const s1R = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  const s1X = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
-  /* ─── Slide 1: "TACOLOGÍA" (visible 0%–33%) ─── */
-  const s1Opacity = useTransform(scrollYProgress, [0, 0.05, 0.22, 0.30], [0, 1, 1, 0]);
-  const s1Y       = useTransform(scrollYProgress, [0, 0.05, 0.22, 0.30], [60, 0, 0, -60]);
+  const s2Y = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const s2R = useTransform(scrollYProgress, [0, 1], [0, 8]);
+  const s2X = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  /* ─── Slide 2: Frase gastronómica (visible 33%–66%) ─── */
-  const s2Opacity = useTransform(scrollYProgress, [0.30, 0.38, 0.55, 0.63], [0, 1, 1, 0]);
-  const s2Y       = useTransform(scrollYProgress, [0.30, 0.38, 0.55, 0.63], [60, 0, 0, -60]);
+  const s3Y = useTransform(scrollYProgress, [0, 1], [0, 0]); // Centro estático
+  const s3R = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  const s3X = useTransform(scrollYProgress, [0, 1], [0, -15]);
 
-  /* ─── Slide 3: CTA final (visible 66%–100%) ─── */
-  const s3Opacity = useTransform(scrollYProgress, [0.63, 0.72, 0.88, 0.96], [0, 1, 1, 0]);
-  const s3Y       = useTransform(scrollYProgress, [0.63, 0.72, 0.88, 0.96], [60, 0, 0, -60]);
+  const s4Y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const s4R = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  const s4X = useTransform(scrollYProgress, [0, 1], [0, 35]);
 
-  /* ─── Scroll indicator (visible solo al inicio) ─── */
-  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  const s5Y = useTransform(scrollYProgress, [0, 1], [0, 450]);
+  const s5R = useTransform(scrollYProgress, [0, 1], [0, -12]);
+  const s5X = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  // ════ NÚCLEO DE ENERGÍA (Aparece cuando la carne se abre) ════
+  const coreScale = useTransform(scrollYProgress, [0, 0.3, 1], [0.5, 1, 4]);
+  const coreOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 0.8, 1, 0]);
+
+  // ════ TEXTOS (4 Slides distribuidos en el scroll largo) ════
+  const t1O = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.20], [0, 1, 1, 0]);
+  const t1Y = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.20], [60, 0, 0, -60]);
+
+  const t2O = useTransform(scrollYProgress, [0.22, 0.28, 0.42, 0.48], [0, 1, 1, 0]);
+  const t2Y = useTransform(scrollYProgress, [0.22, 0.28, 0.42, 0.48], [60, 0, 0, -60]);
+
+  const t3O = useTransform(scrollYProgress, [0.50, 0.56, 0.70, 0.76], [0, 1, 1, 0]);
+  const t3Y = useTransform(scrollYProgress, [0.50, 0.56, 0.70, 0.76], [60, 0, 0, -60]);
+
+  const t4O = useTransform(scrollYProgress, [0.78, 0.84, 0.94, 1], [0, 1, 1, 0]);
+  const t4Y = useTransform(scrollYProgress, [0.78, 0.84, 0.94, 1], [60, 0, 0, -60]);
+
+  const slices = [
+    { id: 1, y: s1Y, r: s1R, x: s1X, className: 'slice-1' },
+    { id: 2, y: s2Y, r: s2R, x: s2X, className: 'slice-2' },
+    { id: 3, y: s3Y, r: s3R, x: s3X, className: 'slice-3' },
+    { id: 4, y: s4Y, r: s4R, x: s4X, className: 'slice-4' },
+    { id: 5, y: s5Y, r: s5R, x: s5X, className: 'slice-5' },
+  ];
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-[#0a0a0a]">
-      {/* ══════════════════ Sticky viewport ══════════════════ */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+    <section ref={containerRef} className="hero-trompo-outer brutal-hologram">
+      <div className="hero-trompo-sticky">
+        
+        {/* Filtro de Scanlines de holograma */}
+        <div className="hologram-scanlines" />
 
-        {/* ─── Fondo de partículas / grain sutil ─── */}
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* Glow de ambiente */}
+        <div className="brutal-glow" />
 
-        {/* ─── Glow ambiental ─── */}
-        <motion.div
-          className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(230,81,0,0.45) 0%, rgba(212,175,55,0.15) 40%, transparent 70%)',
-            opacity: glowOpacity,
-            scale: glowScale,
-          }}
-        />
-
-        {/* ─── TROMPO (centro) ─── */}
-        <motion.div
-          className="relative z-10 w-[280px] h-[420px] sm:w-[320px] sm:h-[480px] md:w-[400px] md:h-[600px] lg:w-[450px] lg:h-[675px]"
-          style={{
-            perspective: 1200,
-          }}
-        >
-          <motion.img
-            src={trompoImg}
-            alt="Trompo al pastor de Tacología girando con el scroll"
-            className="w-full h-full object-contain select-none"
-            draggable={false}
-            style={{
-              rotateY: trompoRotateY,
-              scale: trompoScale,
-              filter: useTransform(trompoBrightness, (v) => `brightness(${v}) drop-shadow(0 0 60px rgba(230,81,0,0.4))`),
-              transformStyle: 'preserve-3d',
-            }}
-          />
-        </motion.div>
-
-        {/* ─── TEXTOS PROMOCIONALES (posición absoluta, lado izquierdo) ─── */}
-        <div className="absolute left-6 sm:left-10 md:left-16 lg:left-24 top-1/2 -translate-y-1/2 z-20 max-w-[420px] pointer-events-none">
-
-          {/* Slide 1 */}
-          <motion.div
-            className="absolute top-0"
-            style={{ opacity: s1Opacity, y: s1Y }}
-          >
-            <span className="inline-block text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-amber-400/80 mb-3 border border-amber-400/30 px-3 py-1 rounded-full">
-              Experiencia Culinaria
-            </span>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter text-white mt-4">
-              TACO
-              <br />
-              <span className="bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
-                LOGÍA
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg text-neutral-400 mt-5 leading-relaxed max-w-[360px]">
-              Donde la tradición milenaria del maíz criollo se encuentra con la alta cocina contemporánea.
-            </p>
-          </motion.div>
-
-          {/* Slide 2 */}
-          <motion.div
-            className="absolute top-0"
-            style={{ opacity: s2Opacity, y: s2Y }}
-          >
-            <span className="inline-block text-xs font-bold tracking-[0.25em] uppercase text-orange-400/80 mb-3">
-              Nixtamal · Leña · Agave
-            </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white mt-4">
-              Fuego lento,
-              <br />
-              <span className="text-orange-400">sabor eterno.</span>
-            </h2>
-            <p className="text-base sm:text-lg text-neutral-400 mt-5 leading-relaxed max-w-[360px]">
-              +40 etiquetas de mezcal artesanal, cortes premium y mariscos del Pacífico en un solo destino gastronómico.
-            </p>
-          </motion.div>
-
-          {/* Slide 3 */}
-          <motion.div
-            className="absolute top-0"
-            style={{ opacity: s3Opacity, y: s3Y }}
-          >
-            <span className="inline-block text-xs font-bold tracking-[0.25em] uppercase text-emerald-400/80 mb-3">
-              Tu mesa te espera
-            </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[0.95] tracking-tight text-white mt-4">
-              Reserva tu
-              <br />
-              <span className="bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-                experiencia.
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-neutral-400 mt-5 leading-relaxed max-w-[360px]">
-              Terraza Agave, Salón Mezcal o la Barra del Chef Taquero. Elige tu escenario perfecto.
-            </p>
-            <a
-              href="#booking-section"
-              className="pointer-events-auto inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-700 text-white font-bold rounded-lg shadow-[0_8px_30px_rgba(230,81,0,0.4)] hover:shadow-[0_12px_40px_rgba(230,81,0,0.6)] hover:-translate-y-1 transition-all duration-300"
-            >
-              Reservar una Mesa
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-          </motion.div>
+        {/* Chispas Cyberpunk */}
+        <div className="spark-container">
+          {sparks.map((s) => (
+            <div
+              key={s.id}
+              className="spark"
+              style={{
+                left: `${s.left}%`,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                color: s.color,
+                animationDelay: `${s.delay}s`,
+                animationDuration: `${s.duration}s`,
+                '--drift': `${s.drift}px`,
+              }}
+            />
+          ))}
         </div>
 
-        {/* ─── Badge lateral derecho ─── */}
-        <motion.div
-          className="absolute right-6 sm:right-10 md:right-16 top-1/2 -translate-y-1/2 z-20 pointer-events-none hidden lg:flex flex-col items-end gap-6"
-          style={{ opacity: useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 0.6, 0.6, 0]) }}
-        >
-          <div className="text-right">
-            <p className="text-[0.65rem] tracking-[0.3em] uppercase text-neutral-500 font-medium">Cocina de autor</p>
-            <p className="text-[0.65rem] tracking-[0.3em] uppercase text-neutral-500 font-medium mt-1">CDMX · 2026</p>
-          </div>
-          <div className="w-px h-24 bg-gradient-to-b from-transparent via-amber-600/40 to-transparent" />
-          <div className="text-right">
-            <p className="text-[0.65rem] tracking-[0.3em] uppercase text-neutral-500 font-medium">100% Maíz Criollo</p>
-            <p className="text-[0.65rem] tracking-[0.3em] uppercase text-neutral-500 font-medium mt-1">Nixtamalizado</p>
-          </div>
+        {/* ════ EL TROMPO QUE SE ABRE EN PEDAZOS ════ */}
+        <motion.div className="hero-trompo-image-wrap" style={{ scale: globalScale }}>
+          
+          {/* Luz intensa que sale de las grietas */}
+          <motion.div className="trompo-core-energy" style={{ scale: coreScale, opacity: coreOpacity }} />
+
+          {slices.map((slice) => (
+            <motion.div 
+              key={slice.id} 
+              className={`slice-wrapper ${slice.className}`}
+              style={{ y: slice.y, x: slice.x, rotateZ: slice.r }}
+            >
+              {/* Imagen Base con Blend Mode Screen para desaparecer el negro */}
+              <img src={trompoImg} className="slice-img slice-base" alt="" />
+              
+              {/* Aberración Cromática (Glitch) */}
+              <motion.img 
+                src={trompoImg} 
+                className="slice-img glitch-cyan" 
+                style={{ opacity: glitchOpacity }} 
+                alt="" 
+                draggable={false}
+              />
+              <motion.img 
+                src={trompoImg} 
+                className="slice-img glitch-red" 
+                style={{ opacity: glitchOpacity }} 
+                alt="" 
+                draggable={false}
+              />
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* ─── Scroll indicator ─── */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
-          style={{ opacity: indicatorOpacity }}
+        {/* ════ TEXTOS BRUTALES ════ */}
+        <div className="hero-text-layer">
+          
+          <motion.div className="hero-slide" style={{ opacity: t1O, y: t1Y }}>
+            <span className="hero-eyebrow">EXPERIENCIA INMERSIVA</span>
+            <h1 className="hero-main-title brutal-text">
+              TACO<br />
+              <span className="hero-title-accent">LOGÍA</span>
+            </h1>
+            <p className="hero-subtitle">
+              Adéntrate en una experiencia sensorial sin precedentes. La esencia del maíz criollo deconstruida.
+            </p>
+          </motion.div>
+
+          <motion.div className="hero-slide" style={{ opacity: t2O, y: t2Y }}>
+            <span className="hero-eyebrow">ROMPER LA TRADICIÓN</span>
+            <h2 className="hero-secondary-title brutal-text">
+              Fuego en<br />
+              <span className="hero-title-accent">expansión.</span>
+            </h2>
+            <p className="hero-subtitle">
+              Desarmamos lo clásico para construir algo visualmente explosivo y culinariamente perfecto.
+            </p>
+          </motion.div>
+
+          <motion.div className="hero-slide" style={{ opacity: t3O, y: t3Y }}>
+            <span className="hero-eyebrow">NÚCLEO AL PASTOR</span>
+            <h2 className="hero-secondary-title brutal-text">
+              Sabor al<br />
+              <span className="hero-title-accent">descubierto.</span>
+            </h2>
+            <p className="hero-subtitle">
+              Capas de intensidad al carbón, expuestas en su máxima expresión.
+            </p>
+          </motion.div>
+
+          <motion.div className="hero-slide" style={{ opacity: t4O, y: t4Y }}>
+            <span className="hero-eyebrow">CONEXIÓN DIRECTA</span>
+            <h2 className="hero-secondary-title brutal-text">
+              Inicia tu<br />
+              <span className="hero-title-accent">secuencia.</span>
+            </h2>
+            <a href="#booking-section" className="hero-cta-button glitch-btn">
+              Reservar una Mesa
+              <span className="cta-arrow">→</span>
+            </a>
+          </motion.div>
+
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="hero-scroll-indicator"
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
         >
-          <span className="text-[0.65rem] tracking-[0.3em] uppercase text-neutral-500 font-medium">
-            Scroll para explorar
-          </span>
-          <div className="w-5 h-8 border-2 border-neutral-600 rounded-full flex justify-center pt-1.5">
-            <motion.div
-              className="w-1 h-1.5 bg-amber-400 rounded-full"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
+          <span className="scroll-label">INICIAR SCROLL</span>
+          <div className="scroll-mouse"><div className="scroll-dot" /></div>
         </motion.div>
 
-        {/* ─── Gradiente inferior para transición suave ─── */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f1115] to-transparent pointer-events-none z-30" />
       </div>
     </section>
   );
