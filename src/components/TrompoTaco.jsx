@@ -3,65 +3,75 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import trompoImg from '../assets/trompo.jpg';
 
 /**
- * TrompoTaco — Secuencia de rotación 3D que acompaña el scroll en la página
- * Aparece a partir de que el usuario supera el hero para darle continuidad visual al trompo
+ * TrompoTaco — Componente interactivo de scroll-driven 3D rotation.
+ *
+ * Lógica:
+ *  - useScroll() captura el progreso de scroll global (scrollYProgress: 0 → 1).
+ *  - useTransform() mapea ese progreso a una rotación de 0° a 1080° (3 vueltas completas)
+ *    sobre el eje Y, creando el efecto de que el trompo gira sobre su propio eje vertical
+ *    conforme el usuario baja por la página.
+ *
+ * Posición:
+ *  - Fijo (sticky) al lado derecho de la pantalla, sin fondo, usando Tailwind CSS.
+ *  - pointer-events-none para no bloquear interacciones con el contenido debajo.
+ *
+ * Uso:
+ *  - Importar en Home.jsx y colocar como hijo directo del contenedor principal.
+ *
+ * @author Victor — feature/inicio-ui
  */
 export default function TrompoTaco() {
   const containerRef = useRef(null);
 
-  // Captura el progreso global del scroll (0 al inicio, 1 al final de la pagina)
+  // Captura el progreso global del scroll (0 al inicio, 1 al final)
   const { scrollYProgress } = useScroll();
 
-  // Rotación continua según el scroll (1080° = 3 vueltas completas)
+  // Mapea el progreso del scroll a grados de rotación en eje Y
+  // 3 rotaciones completas (1080°) a lo largo de todo el scroll
   const rotateY = useTransform(scrollYProgress, [0, 1], [0, 1080]);
 
-  // Aparece de forma fluida después del Hero (a partir del 25% de scroll) y se mantiene hasta el final
-  const opacity = useTransform(scrollYProgress, [0, 0.22, 0.30, 0.95, 1], [0, 0, 1, 1, 0]);
-
-  // Escala sutil y dinámica
-  const scale = useTransform(scrollYProgress, [0.25, 0.6, 1], [0.85, 1, 0.9]);
+  // Escala sutil que pulsa levemente con el scroll
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.9]);
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
-      className="fixed right-6 top-1/2 -translate-y-1/2 z-40 pointer-events-none
-                 hidden lg:flex flex-col items-center justify-center
-                 w-48 h-64 xl:w-56 xl:h-72"
-      style={{ opacity, scale }}
+      className="fixed right-4 top-1/2 -translate-y-1/2 z-50 pointer-events-none
+                 hidden lg:flex items-center justify-center
+                 w-56 h-72 xl:w-64 xl:h-80"
     >
-      {/* Resplandor ambiental ambar detrás del trompo */}
+      {/* Resplandor ambiental detrás del trompo */}
       <motion.div
-        className="absolute inset-0 rounded-full blur-2xl"
+        className="absolute inset-0 rounded-full opacity-30 blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(230,81,0,0.35) 0%, rgba(212,175,55,0.15) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(230,81,0,0.5) 0%, transparent 70%)',
           rotateY,
         }}
       />
 
-      {/* Imagen del trompo con blend mode para desaparecer fondo negro y rotación 3D */}
+      {/* Imagen del trompo con rotación 3D */}
       <motion.img
         src={trompoImg}
         alt="Trompo al pastor girando"
-        className="relative w-full h-full object-contain select-none"
+        className="relative w-full h-full object-contain drop-shadow-2xl select-none"
         style={{
           rotateY,
-          mixBlendMode: 'screen',
-          filter: 'contrast(1.15) saturate(1.25) drop-shadow(0 0 15px rgba(230,81,0,0.4))',
+          scale,
           perspective: 1200,
           transformStyle: 'preserve-3d',
         }}
         draggable={false}
       />
 
-      {/* Indicador de secuencia */}
-      <motion.div
-        className="mt-2 text-center"
-        style={{ opacity: useTransform(scrollYProgress, [0.25, 0.35, 0.9, 0.98], [0, 1, 1, 0]) }}
+      {/* Label flotante debajo */}
+      <motion.span
+        className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap
+                   text-xs font-bold tracking-widest uppercase
+                   text-amber-400/70"
+        style={{ opacity: useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]) }}
       >
-        <span className="block text-[10px] font-extrabold tracking-[0.2em] uppercase text-amber-400/80 bg-black/60 px-3 py-1 rounded-full border border-amber-500/30 backdrop-blur-sm shadow-lg">
-          Secuencia Al Pastor
-        </span>
-      </motion.div>
-    </motion.div>
+        Al Pastor
+      </motion.span>
+    </div>
   );
 }

@@ -7,81 +7,72 @@ import './HeroTrompo.css';
 function generateSparks(count) {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
-    left: 15 + Math.random() * 70,
+    left: 20 + Math.random() * 60,
     size: 2 + Math.random() * 4,
     delay: Math.random() * 3,
     duration: 3 + Math.random() * 4,
-    drift: -80 + Math.random() * 160,
-    color: Math.random() > 0.5 ? '#f59e0b' : '#e65100', // Ámbar y fuego
+    drift: -100 + Math.random() * 200,
+    color: Math.random() > 0.5 ? '#00ffff' : '#ff00ff', // Cyan y magenta
   }));
 }
 
 export default function HeroTrompo() {
   const containerRef = useRef(null);
-  const sparks = useMemo(() => generateSparks(40), []);
+  const sparks = useMemo(() => generateSparks(50), []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Escala global del trompo y rotación de secuencia
-  const globalScale = useTransform(scrollYProgress, [0, 0.4, 0.75, 1], [1.0, 1.2, 1.25, 0.95]);
-  const globalRotateY = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  const globalOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0.2]);
-  
-  // Parpadeo glitch holográfico en los momentos de mayor separación
+  // Escala global del trompo (se acerca dramáticamente al final)
+  const globalScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.3, 2.0]);
+
+  // Parpadeo glitch holográfico intenso en puntos clave del scroll
   const glitchOpacity = useTransform(
     scrollYProgress,
-    [0, 0.2, 0.35, 0.4, 0.6, 0.65, 0.8, 0.85, 1],
-    [0, 0,   0.7,  0.1, 0.8, 0.1,  0.9, 0,    0]
+    [0, 0.1, 0.15, 0.2, 0.4, 0.45, 0.5, 0.7, 0.75, 0.8, 1],
+    [0, 0, 0.9, 0, 0, 0.8, 0, 0, 1, 0, 0.6]
   );
 
-  // ════ SECUENCIA PROGRESIVA DE CORTES (SLICES) ════
-  // Fase 1 (0 -> 0.20): Unidos completamente
-  // Fase 2 (0.20 -> 0.65): Se deconstruyen y abren revelando el fuego interior
-  // Fase 3 (0.65 -> 0.90): Máxima expansión
-  // Fase 4 (0.90 -> 1.0): Convergencia armónica
-  const s1Y = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -220, -50]);
-  const s1R = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -10, 0]);
-  const s1X = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -35, 0]);
+  // ════ ANIMACIONES DE LOS CORTES (SLICES) ════
+  // Se separan en los ejes Y y X, y rotan sutilmente
+  const s1Y = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const s1R = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  const s1X = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
-  const s2Y = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -90, -20]);
-  const s2R = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 6, 0]);
-  const s2X = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 25, 0]);
+  const s2Y = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const s2R = useTransform(scrollYProgress, [0, 1], [0, 8]);
+  const s2X = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const s3Y = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 0, 0]); // Centro
-  const s3R = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -3, 0]);
-  const s3X = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -10, 0]);
+  const s3Y = useTransform(scrollYProgress, [0, 1], [0, 0]); // Centro estático
+  const s3R = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  const s3X = useTransform(scrollYProgress, [0, 1], [0, -15]);
 
-  const s4Y = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 110, 20]);
-  const s4R = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 8, 0]);
-  const s4X = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 20, 0]);
+  const s4Y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const s4R = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  const s4X = useTransform(scrollYProgress, [0, 1], [0, 35]);
 
-  const s5Y = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, 260, 60]);
-  const s5R = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -8, 0]);
-  const s5X = useTransform(scrollYProgress, [0, 0.2, 0.65, 1], [0, 0, -30, 0]);
+  const s5Y = useTransform(scrollYProgress, [0, 1], [0, 450]);
+  const s5R = useTransform(scrollYProgress, [0, 1], [0, -12]);
+  const s5X = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
-  // ════ NÚCLEO DE ENERGÍA (Brillo ígneo interior) ════
-  const coreScale = useTransform(scrollYProgress, [0, 0.25, 0.65, 1], [0.4, 1.2, 2.5, 0.8]);
-  const coreOpacity = useTransform(scrollYProgress, [0, 0.2, 0.45, 0.8, 1], [0, 0.3, 0.9, 0.7, 0]);
+  // ════ NÚCLEO DE ENERGÍA (Aparece cuando la carne se abre) ════
+  const coreScale = useTransform(scrollYProgress, [0, 0.3, 1], [0.5, 1, 4]);
+  const coreOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 0.8, 1, 0]);
 
-  // ════ SECUENCIA DE TEXTOS (4 Fases continuas) ════
-  // Slide 1: Visible desde el inicio (scroll 0) para impacto visual inmediato
-  const t1O = useTransform(scrollYProgress, [0, 0.16, 0.24], [1, 1, 0]);
-  const t1Y = useTransform(scrollYProgress, [0, 0.16, 0.24], [0, 0, -40]);
+  // ════ TEXTOS (4 Slides distribuidos en el scroll largo) ════
+  const t1O = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.20], [0, 1, 1, 0]);
+  const t1Y = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.20], [60, 0, 0, -60]);
 
-  // Slide 2: Fuego en expansión
-  const t2O = useTransform(scrollYProgress, [0.25, 0.32, 0.45, 0.51], [0, 1, 1, 0]);
-  const t2Y = useTransform(scrollYProgress, [0.25, 0.32, 0.45, 0.51], [40, 0, 0, -40]);
+  const t2O = useTransform(scrollYProgress, [0.22, 0.28, 0.42, 0.48], [0, 1, 1, 0]);
+  const t2Y = useTransform(scrollYProgress, [0.22, 0.28, 0.42, 0.48], [60, 0, 0, -60]);
 
-  // Slide 3: Núcleo al pastor
-  const t3O = useTransform(scrollYProgress, [0.52, 0.59, 0.72, 0.78], [0, 1, 1, 0]);
-  const t3Y = useTransform(scrollYProgress, [0.52, 0.59, 0.72, 0.78], [40, 0, 0, -40]);
+  const t3O = useTransform(scrollYProgress, [0.50, 0.56, 0.70, 0.76], [0, 1, 1, 0]);
+  const t3Y = useTransform(scrollYProgress, [0.50, 0.56, 0.70, 0.76], [60, 0, 0, -60]);
 
-  // Slide 4: Conexión directa y botón CTA
-  const t4O = useTransform(scrollYProgress, [0.79, 0.85, 0.96, 1], [0, 1, 1, 0.2]);
-  const t4Y = useTransform(scrollYProgress, [0.79, 0.85, 0.96, 1], [40, 0, 0, -20]);
+  const t4O = useTransform(scrollYProgress, [0.78, 0.84, 0.94, 1], [0, 1, 1, 0]);
+  const t4Y = useTransform(scrollYProgress, [0.78, 0.84, 0.94, 1], [60, 0, 0, -60]);
 
   const slices = [
     { id: 1, y: s1Y, r: s1R, x: s1X, className: 'slice-1' },
@@ -94,14 +85,14 @@ export default function HeroTrompo() {
   return (
     <section ref={containerRef} className="hero-trompo-outer brutal-hologram">
       <div className="hero-trompo-sticky">
-        
-        {/* Filtro de Scanlines holográficas */}
+
+        {/* Filtro de Scanlines de holograma */}
         <div className="hologram-scanlines" />
 
         {/* Glow de ambiente */}
         <div className="brutal-glow" />
 
-        {/* Chispas y brasas flotantes */}
+        {/* Chispas Cyberpunk */}
         <div className="spark-container">
           {sparks.map((s) => (
             <div
@@ -120,61 +111,43 @@ export default function HeroTrompo() {
           ))}
         </div>
 
-        {/* ════ TROMPO INTERACTIVO CON SECUENCIA 3D ════ */}
-        <motion.div 
-          className="hero-trompo-image-wrap" 
-          style={{ 
-            scale: globalScale, 
-            rotateY: globalRotateY,
-            opacity: globalOpacity,
-            perspective: 1200 
-          }}
-          animate={{
-            y: [0, -8, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 5,
-            ease: "easeInOut",
-          }}
-        >
-          {/* Núcleo ígneo de energía que emana del centro */}
-          <motion.div 
-            className="trompo-core-energy" 
-            style={{ scale: coreScale, opacity: coreOpacity }} 
-          />
+        {/* ════ EL TROMPO QUE SE ABRE EN PEDAZOS ════ */}
+        <motion.div className="hero-trompo-image-wrap" style={{ scale: globalScale }}>
+
+          {/* Luz intensa que sale de las grietas */}
+          <motion.div className="trompo-core-energy" style={{ scale: coreScale, opacity: coreOpacity }} />
 
           {slices.map((slice) => (
-            <motion.div 
-              key={slice.id} 
+            <motion.div
+              key={slice.id}
               className={`slice-wrapper ${slice.className}`}
               style={{ y: slice.y, x: slice.x, rotateZ: slice.r }}
             >
-              {/* Imagen Base con Blend Mode Screen */}
-              <img src={trompoImg} className="slice-img slice-base" alt="Trompo Tacología" />
-              
-              {/* Capas de Aberración Cromática (Glitch) */}
-              <motion.img 
-                src={trompoImg} 
-                className="slice-img glitch-cyan" 
-                style={{ opacity: glitchOpacity }} 
-                alt="" 
+              {/* Imagen Base con Blend Mode Screen para desaparecer el negro */}
+              <img src={trompoImg} className="slice-img slice-base" alt="" />
+
+              {/* Aberración Cromática (Glitch) */}
+              <motion.img
+                src={trompoImg}
+                className="slice-img glitch-cyan"
+                style={{ opacity: glitchOpacity }}
+                alt=""
                 draggable={false}
               />
-              <motion.img 
-                src={trompoImg} 
-                className="slice-img glitch-red" 
-                style={{ opacity: glitchOpacity }} 
-                alt="" 
+              <motion.img
+                src={trompoImg}
+                className="slice-img glitch-red"
+                style={{ opacity: glitchOpacity }}
+                alt=""
                 draggable={false}
               />
             </motion.div>
           ))}
         </motion.div>
 
-        {/* ════ SECUENCIA DE TEXTOS SINCRONIZADOS ════ */}
+        {/* ════ TEXTOS BRUTALES ════ */}
         <div className="hero-text-layer">
-          
+
           <motion.div className="hero-slide" style={{ opacity: t1O, y: t1Y }}>
             <span className="hero-eyebrow">EXPERIENCIA INMERSIVA</span>
             <h1 className="hero-main-title brutal-text">
@@ -182,7 +155,7 @@ export default function HeroTrompo() {
               <span className="hero-title-accent">LOGÍA</span>
             </h1>
             <p className="hero-subtitle">
-              Adéntrate en una experiencia sensorial sin precedentes. La esencia del maíz criollo y el fuego tradicional deconstruida.
+              Adéntrate en una experiencia sensorial sin precedentes. La esencia del maíz criollo deconstruida.
             </p>
           </motion.div>
 
@@ -204,7 +177,7 @@ export default function HeroTrompo() {
               <span className="hero-title-accent">descubierto.</span>
             </h2>
             <p className="hero-subtitle">
-              Capas de intensidad al carbón, expuestas en su máxima expresión gastronómica.
+              Capas de intensidad al carbón, expuestas en su máxima expresión.
             </p>
           </motion.div>
 
@@ -222,12 +195,12 @@ export default function HeroTrompo() {
 
         </div>
 
-        {/* Indicador de Scroll Dinámico */}
-        <motion.div 
+        {/* Scroll Indicator */}
+        <motion.div
           className="hero-scroll-indicator"
-          style={{ opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]) }}
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
         >
-          <span className="scroll-label">DESLIZA PARA CONTINUAR LA SECUENCIA</span>
+          <span className="scroll-label">INICIAR SCROLL</span>
           <div className="scroll-mouse"><div className="scroll-dot" /></div>
         </motion.div>
 

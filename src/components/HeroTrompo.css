@@ -5,7 +5,8 @@
 
 .brutal-hologram {
   position: relative;
-  height: 300vh; /* Altura calibrada para secuencia completa de 4 fases cinematograficas */
+  height: 220vh;
+  /* Altura optimizada para scroll suave y rapido acceso al menu */
 }
 
 .hero-trompo-sticky {
@@ -17,20 +18,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #050505; /* Fondo ultra oscuro estricto para el Screen Blend */
+  background: #050505;
+  /* Fondo ultra oscuro estricto para el Screen Blend */
 }
 
 /* ─── Hologram Overlay ─── */
 .hologram-scanlines {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2px,
-    rgba(0, 255, 255, 0.03) 3px,
-    rgba(255, 0, 255, 0.03) 4px
-  );
+  background: repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 255, 255, 0.03) 3px,
+      rgba(255, 0, 255, 0.03) 4px);
   z-index: 20;
   pointer-events: none;
   mix-blend-mode: overlay;
@@ -41,7 +41,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,255,255,0.05) 0%, rgba(255,0,255,0.05) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.05) 0%, rgba(255, 0, 255, 0.05) 40%, transparent 70%);
   pointer-events: none;
   z-index: 2;
 }
@@ -54,9 +54,26 @@
   height: 500px;
 }
 
-@media (min-width: 640px) { .hero-trompo-image-wrap { width: 400px; height: 600px; } }
-@media (min-width: 1024px) { .hero-trompo-image-wrap { width: 500px; height: 750px; } }
-@media (min-width: 1440px) { .hero-trompo-image-wrap { width: 560px; height: 840px; } }
+@media (min-width: 640px) {
+  .hero-trompo-image-wrap {
+    width: 400px;
+    height: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-trompo-image-wrap {
+    width: 500px;
+    height: 750px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-trompo-image-wrap {
+    width: 560px;
+    height: 840px;
+  }
+}
 
 /* ─── Piezas / Cortes (Slices) ─── */
 .slice-wrapper {
@@ -73,7 +90,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mix-blend-mode: screen; /* Esto ELIMINA los pixeles negros de tu JPG mágicamente */
+  mix-blend-mode: screen;
+  /* Esto ELIMINA los pixeles negros de tu JPG mágicamente */
 }
 
 /* Base styling */
@@ -82,11 +100,25 @@
 }
 
 /* ─── Cortes Geométricos (Separación Limpia) ─── */
-.slice-1 .slice-img { clip-path: polygon(0 0, 100% 0, 100% 22%, 0 18%); }
-.slice-2 .slice-img { clip-path: polygon(0 18%, 100% 22%, 100% 45%, 0 40%); }
-.slice-3 .slice-img { clip-path: polygon(0 40%, 100% 45%, 100% 62%, 0 65%); }
-.slice-4 .slice-img { clip-path: polygon(0 65%, 100% 62%, 100% 85%, 0 82%); }
-.slice-5 .slice-img { clip-path: polygon(0 82%, 100% 85%, 100% 100%, 0 100%); }
+.slice-1 .slice-img {
+  clip-path: polygon(0 0, 100% 0, 100% 22%, 0 18%);
+}
+
+.slice-2 .slice-img {
+  clip-path: polygon(0 18%, 100% 22%, 100% 45%, 0 40%);
+}
+
+.slice-3 .slice-img {
+  clip-path: polygon(0 40%, 100% 45%, 100% 62%, 0 65%);
+}
+
+.slice-4 .slice-img {
+  clip-path: polygon(0 65%, 100% 62%, 100% 85%, 0 82%);
+}
+
+.slice-5 .slice-img {
+  clip-path: polygon(0 82%, 100% 85%, 100% 100%, 0 100%);
+}
 
 
 /* ─── Efecto Aberración Cromática Glitch ─── */
@@ -94,24 +126,50 @@
   filter: sepia(1) hue-rotate(140deg) saturate(400%) brightness(1.2);
   animation: glitchAnim1 0.2s infinite;
 }
+
 .glitch-red {
   filter: sepia(1) hue-rotate(300deg) saturate(400%) brightness(1.2);
   animation: glitchAnim2 0.3s infinite reverse;
 }
 
 @keyframes glitchAnim1 {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-4px, 2px); }
-  50% { transform: translate(4px, -2px); }
-  75% { transform: translate(-2px, 4px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-4px, 2px);
+  }
+
+  50% {
+    transform: translate(4px, -2px);
+  }
+
+  75% {
+    transform: translate(-2px, 4px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @keyframes glitchAnim2 {
-  0% { transform: translate(0, 0); }
-  33% { transform: translate(5px, -3px); }
-  66% { transform: translate(-3px, 5px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  33% {
+    transform: translate(5px, -3px);
+  }
+
+  66% {
+    transform: translate(-3px, 5px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 /* ─── Núcleo de Energía (Brilla entre las grietas) ─── */
@@ -147,10 +205,24 @@
 }
 
 @keyframes sparkRise {
-  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateY(-400px) translateX(var(--drift)) scale(0.8); opacity: 0.8; }
-  100% { transform: translateY(-800px) translateX(calc(var(--drift) * 1.5)) scale(0); opacity: 0; }
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-400px) translateX(var(--drift)) scale(0.8);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-800px) translateX(calc(var(--drift) * 1.5)) scale(0);
+    opacity: 0;
+  }
 }
 
 
@@ -165,9 +237,24 @@
   pointer-events: none;
 }
 
-@media (min-width: 640px) { .hero-text-layer { left: 2.5rem; } }
-@media (min-width: 1024px) { .hero-text-layer { left: 5rem; max-width: 520px; } }
-@media (min-width: 1280px) { .hero-text-layer { left: 7rem; } }
+@media (min-width: 640px) {
+  .hero-text-layer {
+    left: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-text-layer {
+    left: 5rem;
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-text-layer {
+    left: 7rem;
+  }
+}
 
 .hero-slide {
   position: absolute;
@@ -291,6 +378,15 @@
 }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.3; }
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 0.3;
+  }
 }

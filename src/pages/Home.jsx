@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import HeroTrompo from '../components/HeroTrompo';
-import TrompoTaco from '../components/TrompoTaco';
 import { useAuth } from '../context/AuthContext';
 import './Home.css';
 
@@ -141,9 +140,6 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
       {/* Hero inmersivo scroll-driven con trompo 3D rotando */}
       <HeroTrompo />
 
-      {/* Secuencia 3D complementaria que acompaña el scroll en el resto de la página */}
-      <TrompoTaco />
-
       {/* Featured Menu Highlights */}
       <section className="menu-preview-section">
         <div className="section-header">
@@ -180,7 +176,7 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
             <span className="section-subtitle">EXPERIENCIA PRIVADA</span>
             <h2 className="section-title">Reserva tu Experiencia</h2>
             <p className="booking-text">
-              Garantiza tu lugar en nuestro salón principal, cava de mezcales o terraza al aire libre. 
+              Garantiza tu lugar en nuestro salón principal, cava de mezcales o terraza al aire libre.
               Ideal para celebraciones memorables y veladas de alta cocina.
             </p>
             <div className="perks-list">
@@ -205,11 +201,11 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
             <form onSubmit={handleSubmit} className="booking-form">
               <div className="form-group">
                 <label>Nombre y Apellidos</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Ej. Sofía Valenzuela"
                   value={reserveForm.name}
-                  onChange={(e) => setReserveForm({...reserveForm, name: e.target.value})}
+                  onChange={(e) => setReserveForm({ ...reserveForm, name: e.target.value })}
                   required
                 />
               </div>
@@ -217,19 +213,19 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
               <div className="form-row">
                 <div className="form-group">
                   <label>Teléfono de Contacto</label>
-                  <input 
-                    type="tel" 
+                  <input
+                    type="tel"
                     placeholder="+52 55 ..."
                     value={reserveForm.phone}
-                    onChange={(e) => setReserveForm({...reserveForm, phone: e.target.value})}
+                    onChange={(e) => setReserveForm({ ...reserveForm, phone: e.target.value })}
                     required
                   />
                 </div>
                 <div className="form-group">
                   <label>Número de Personas</label>
-                  <select 
+                  <select
                     value={reserveForm.guests}
-                    onChange={(e) => setReserveForm({...reserveForm, guests: Number(e.target.value)})}
+                    onChange={(e) => setReserveForm({ ...reserveForm, guests: Number(e.target.value) })}
                   >
                     <option value={1}>1 Persona</option>
                     <option value={2}>2 Personas (Mesa íntima)</option>
@@ -243,18 +239,18 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
               <div className="form-row">
                 <div className="form-group">
                   <label>Fecha</label>
-                  <input 
+                  <input
                     type="date"
                     value={reserveForm.date}
-                    onChange={(e) => setReserveForm({...reserveForm, date: e.target.value})}
+                    onChange={(e) => setReserveForm({ ...reserveForm, date: e.target.value })}
                     required
                   />
                 </div>
                 <div className="form-group">
                   <label>Hora</label>
-                  <select 
+                  <select
                     value={reserveForm.time}
-                    onChange={(e) => setReserveForm({...reserveForm, time: e.target.value})}
+                    onChange={(e) => setReserveForm({ ...reserveForm, time: e.target.value })}
                   >
                     <option value="14:00">14:00 hrs (Comida)</option>
                     <option value="16:00">16:00 hrs</option>
@@ -267,9 +263,9 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
 
               <div className="form-group">
                 <label>Zona Preferida</label>
-                <select 
+                <select
                   value={reserveForm.tableArea}
-                  onChange={(e) => setReserveForm({...reserveForm, tableArea: e.target.value})}
+                  onChange={(e) => setReserveForm({ ...reserveForm, tableArea: e.target.value })}
                 >
                   <option value="Terraza Agave">Terraza Agave (Exterior con vista)</option>
                   <option value="Salón Mezcal">Salón Mezcal (Íntimo & Cava)</option>
