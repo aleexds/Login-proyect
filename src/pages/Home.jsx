@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import HeroTrompo from '../components/HeroTrompo';
+import TrompoTaco from '../components/TrompoTaco';
 import { useAuth } from '../context/AuthContext';
 import './Home.css';
 
@@ -139,6 +140,9 @@ export default function Home({ menu: propMenu = [], onQuickReserve }) {
     <div className="home-container">
       {/* Hero inmersivo scroll-driven con trompo 3D rotando */}
       <HeroTrompo />
+
+      {/* Secuencia 3D complementaria que acompaña el scroll en el resto de la página */}
+      <TrompoTaco />
 
       {/* Featured Menu Highlights */}
       <section className="menu-preview-section">
