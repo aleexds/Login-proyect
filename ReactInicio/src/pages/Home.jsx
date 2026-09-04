@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TrompoTaco from '../components/TrompoTaco';
 import './Home.css';
 
 export default function Home({ onNavigate, menu = [], onQuickReserve }) {
@@ -34,6 +35,8 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
 
   return (
     <div className="home-container">
+      {/* Trompo 3D interactivo fijo al lado derecho — gira con el scroll */}
+      <TrompoTaco />
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
