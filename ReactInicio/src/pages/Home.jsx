@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TrompoTaco from '../components/TrompoTaco';
+import HeroTrompo from '../components/HeroTrompo';
 import './Home.css';
 
 export default function Home({ onNavigate, menu = [], onQuickReserve }) {
@@ -35,45 +35,8 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
 
   return (
     <div className="home-container">
-      {/* Trompo 3D interactivo fijo al lado derecho — gira con el scroll */}
-      <TrompoTaco />
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-content">
-          <div className="hero-tag">EXPERIENCIA GASTRONÓMICA MEXICANA</div>
-          <h1 className="hero-title">
-            El Arte Supremo del <span className="text-highlight">Taco de Autor</span>
-          </h1>
-          <p className="hero-description">
-            En Tacología combinamos técnicas ancestrales de nixtamalización con los cortes 
-            y mariscos más selectos del país. Aromas a leña, destilados de agave y un ambiente 
-            incomparable diseñado para sibaritas.
-          </p>
-          <div className="hero-actions">
-            <a href="#booking-section" className="btn-primary">
-              Reservar una Mesa
-            </a>
-            <button onClick={() => onNavigate && onNavigate('menu')} className="btn-secondary">
-              Ver Menú Exclusivo
-            </button>
-          </div>
-
-          <div className="hero-stats">
-            <div className="stat-card">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Maíz Criollo Nixtamalizado</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-number">+40</span>
-              <span className="stat-label">Etiquetas de Mezcal & Tequila</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-number">4.9 ★</span>
-              <span className="stat-label">Excelencia Culinaria</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero inmersivo scroll-driven con trompo 3D rotando */}
+      <HeroTrompo />
 
       {/* Featured Menu Highlights */}
       <section className="menu-preview-section">
