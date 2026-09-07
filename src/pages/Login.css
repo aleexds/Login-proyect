@@ -1,0 +1,302 @@
+:root {
+  --fire-red: #dc2626;
+  --fire-orange: #ea580c;
+  --fire-yellow: #f59e0b;
+  --card-bg: rgba(12, 6, 4, 0.82);
+  --card-border: rgba(249, 115, 22, 0.35);
+}
+
+/* Contenedor principal a pantalla completa con scroll seguro */
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 100%, #2a0802 0%, #0d0301 60%, #030100 100%);
+  position: relative;
+  overflow-y: auto;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* 1. Fondo completo de Resplandor de Fuego */
+.full-page-fire-glow {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 90%, rgba(234, 88, 12, 0.45) 0%, rgba(220, 38, 38, 0.25) 35%, transparent 70%),
+    radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+  filter: blur(60px);
+  animation: pulseFireBackground 4s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes pulseFireBackground {
+  0% { opacity: 0.7; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* 2. Capa de Humo Envolvente por toda la pantalla */
+.full-page-smoke {
+  position: absolute;
+  inset: -50%;
+  background-image: 
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(249, 115, 22, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 30%, rgba(220, 38, 38, 0.05) 0%, transparent 45%);
+  filter: blur(50px);
+  animation: rotateSmoke 25s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes rotateSmoke {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* 3. Gran Malla de Llamas en toda la parte inferior del fondo */
+.background-flames-container {
+  position: absolute;
+  bottom: -40px;
+  left: -5%;
+  width: 110%;
+  height: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bg-flame {
+  width: 18vw;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, var(--fire-yellow) 0%, var(--fire-orange) 45%, var(--fire-red) 75%, transparent 95%);
+  border-radius: 50% 50% 20% 20% / 90% 90% 10% 10%;
+  filter: blur(20px);
+  animation: burnBackgroundFlame 2.2s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  opacity: 0.85;
+}
+
+.bg-flame:nth-child(2n) {
+  animation-duration: 1.7s;
+  animation-delay: 0.3s;
+  height: 120%;
+}
+
+.bg-flame:nth-child(3n) {
+  animation-duration: 2.5s;
+  animation-delay: 0.7s;
+  height: 90%;
+}
+
+@keyframes burnBackgroundFlame {
+  0% { transform: scaleY(0.85) skewX(-4deg); opacity: 0.75; }
+  100% { transform: scaleY(1.3) skewX(4deg); opacity: 1; }
+}
+
+/* 4. Tarjeta Glassmorphism flotando sobre el fuego */
+.login-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 410px;
+  padding: 2.8rem 2.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95),
+              0 0 40px rgba(234, 88, 12, 0.25);
+  animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardEntrance {
+  0% { opacity: 0; transform: translateY(40px) scale(0.92); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header & Trompo */
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.trompo-badge {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, rgba(10, 5, 2, 0.9) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
+}
+
+.trompo-svg {
+  width: 46px;
+  height: 46px;
+  animation: swayTrompo 5s ease-in-out infinite alternate;
+}
+
+@keyframes swayTrompo {
+  0% { transform: rotate(-8deg) scale(0.96); }
+  100% { transform: rotate(8deg) scale(1.04); }
+}
+
+.brand-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 20%, var(--fire-yellow) 70%, var(--fire-orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  color: #a1a1aa;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+/* Inputs y Formulario */
+.form-group {
+  margin-bottom: 1.4rem;
+}
+
+.form-label {
+  display: block;
+  color: #e4e4e7;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: #71717a;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: var(--fire-orange);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+}
+
+.form-input:focus + .input-icon,
+.input-container:focus-within .input-icon {
+  color: var(--fire-yellow);
+}
+
+/* Botón con brillo incandescente */
+.submit-button {
+  width: 100%;
+  padding: 0.95rem;
+  margin-top: 0.8rem;
+  background: linear-gradient(135deg, var(--fire-orange), var(--fire-yellow));
+  border: none;
+  border-radius: 10px;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 25px rgba(249, 115, 22, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.7);
+  filter: brightness(1.15);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card-footer {
+  margin-top: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+}
+
+.footer-text {
+  color: #71717a;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.error-banner {
+  background: rgba(220, 38, 38, 0.25);
+  border: 1px solid rgba(220, 38, 38, 0.6);
+  color: #fca5a5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
