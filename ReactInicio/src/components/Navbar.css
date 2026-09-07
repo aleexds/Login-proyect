@@ -1,17 +1,21 @@
+/* ═══════════════════════════════════
+   NAVBAR — Estilo Retro Tacología
+   ═══════════════════════════════════ */
+
 .navbar-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 17, 21, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background: rgba(247, 244, 234, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid var(--color-maiz);
+  box-shadow: 0 2px 12px rgba(89, 54, 34, 0.08);
 }
 
 .navbar-container {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0.9rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,14 +24,21 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.7rem;
   cursor: pointer;
   user-select: none;
 }
 
-.brand-icon {
-  font-size: 2.2rem;
-  filter: drop-shadow(0 2px 8px rgba(230, 81, 0, 0.5));
+.brand-taco-icon {
+  width: 42px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(242, 184, 75, 0.4));
+  transition: transform var(--transition-fast);
+}
+
+.navbar-brand:hover .brand-taco-icon {
+  transform: rotate(-8deg) scale(1.1);
 }
 
 .brand-text {
@@ -36,75 +47,78 @@
 }
 
 .brand-title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, #f57c00 0%, #d4af37 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-carne);
+  letter-spacing: 1px;
+  line-height: 1.1;
 }
 
 .brand-subtitle {
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--color-text-muted);
+  color: var(--color-salsa);
+  font-weight: 600;
 }
 
+/* ─── Navigation ─── */
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .nav-link {
   background: transparent;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 0.5rem 0.9rem;
+  color: var(--color-carne);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
 }
 
 .nav-link:hover {
-  color: var(--color-text-main);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-salsa);
+  background: rgba(217, 56, 41, 0.08);
 }
 
 .nav-link.active {
-  color: #fff;
-  background: rgba(230, 81, 0, 0.15);
-  border: 1px solid rgba(230, 81, 0, 0.4);
+  color: var(--color-salsa);
+  background: rgba(217, 56, 41, 0.1);
+  border: 1.5px solid rgba(217, 56, 41, 0.3);
 }
 
 .nav-link.admin-badge {
-  color: var(--color-accent);
-  border: 1px dashed rgba(212, 175, 55, 0.4);
+  color: var(--color-guacamole);
+  border: 1px dashed rgba(74, 140, 63, 0.5);
 }
 
+/* ─── User Badge ─── */
 .user-profile-badge {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  background: var(--color-bg-card);
-  padding: 0.35rem 0.8rem;
+  gap: 0.6rem;
+  background: white;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-maiz);
   margin-left: 0.5rem;
+  box-shadow: var(--shadow-warm);
 }
 
 .user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(135deg, var(--color-maiz), var(--color-salsa));
   color: #fff;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .user-info-text {
@@ -113,77 +127,151 @@
 }
 
 .user-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-carne);
 }
 
 .user-role-label {
-  font-size: 0.68rem;
-  color: var(--color-accent);
-  text-transform: capitalize;
+  font-size: 0.65rem;
+  color: var(--color-guacamole);
+  font-weight: 600;
 }
 
 .btn-logout {
-  background: rgba(239, 68, 68, 0.15);
-  color: #fca5a5;
-  padding: 0.3rem 0.6rem;
+  background: rgba(217, 56, 41, 0.1);
+  color: var(--color-salsa);
+  padding: 0.25rem 0.55rem;
   border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   transition: all var(--transition-fast);
 }
 
 .btn-logout:hover {
-  background: #ef4444;
+  background: var(--color-salsa);
   color: #fff;
 }
 
+/* ─── Auth Buttons ─── */
 .nav-auth-buttons {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .btn-login {
   background: transparent;
-  color: var(--color-text-main);
-  border: 1px solid var(--color-border);
-  padding: 0.5rem 1.1rem;
+  color: var(--color-carne);
+  border: 1.5px solid var(--color-carne);
+  padding: 0.45rem 1rem;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   transition: all var(--transition-fast);
 }
 
 .btn-login:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--color-text-muted);
+  background: var(--color-carne);
+  color: white;
 }
 
 .btn-reserve-cta {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #bf360c 100%);
+  background: var(--color-salsa);
   color: #fff;
-  padding: 0.55rem 1.2rem;
+  padding: 0.5rem 1.1rem;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(230, 81, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(217, 56, 41, 0.3);
   transition: all var(--transition-fast);
 }
 
 .btn-reserve-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(230, 81, 0, 0.5);
+  box-shadow: 0 6px 18px rgba(217, 56, 41, 0.45);
+  background: var(--color-salsa-dark);
 }
 
+/* ─── Mobile ─── */
+.mobile-toggle {
+  display: none;
+  background: none;
+  padding: 0.5rem;
+  z-index: 110;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-carne);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: var(--color-carne);
+  transition: all 0.3s ease;
+}
+
+.hamburger::before { top: -7px; }
+.hamburger::after { top: 7px; }
+
+.hamburger.open { background: transparent; }
+.hamburger.open::before { transform: rotate(45deg); top: 0; }
+.hamburger.open::after { transform: rotate(-45deg); top: 0; }
+
 @media (max-width: 860px) {
-  .navbar-container {
-    flex-direction: column;
-    gap: 0.8rem;
+  .mobile-toggle {
+    display: block;
   }
+
   .navbar-nav {
-    flex-wrap: wrap;
-    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--color-crema);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 1.5rem 2rem;
+    gap: 0.3rem;
+    box-shadow: -4px 0 24px rgba(89, 54, 34, 0.15);
+    transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 105;
+  }
+
+  .navbar-nav.nav-open {
+    right: 0;
+  }
+
+  .nav-link {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .nav-auth-buttons {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
+  .btn-login, .btn-reserve-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .user-profile-badge {
+    margin-left: 0;
+    margin-top: 1rem;
   }
 }

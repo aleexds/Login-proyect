@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import trompoImg from '../assets/trompo.jpg';
 import './HeroTrompo.css';
 
-/* ─── Generador de chispas holográficas ─── */
+/* ─── Generador de chispas cálidas ─── */
 function generateSparks(count) {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -12,7 +12,7 @@ function generateSparks(count) {
     delay: Math.random() * 3,
     duration: 3 + Math.random() * 4,
     drift: -100 + Math.random() * 200,
-    color: Math.random() > 0.5 ? '#00ffff' : '#ff00ff', // Cyan y magenta
+    color: Math.random() > 0.5 ? '#F2B84B' : '#D93829', // Maíz y Salsa
   }));
 }
 
@@ -28,7 +28,7 @@ export default function HeroTrompo() {
   // Escala global del trompo (se acerca dramáticamente al final)
   const globalScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.3, 2.0]);
   
-  // Parpadeo glitch holográfico intenso en puntos clave del scroll
+  // Parpadeo glitch cálido en puntos clave del scroll
   const glitchOpacity = useTransform(
     scrollYProgress,
     [0, 0.1, 0.15, 0.2, 0.4, 0.45, 0.5, 0.7, 0.75, 0.8, 1],
@@ -86,13 +86,13 @@ export default function HeroTrompo() {
     <section ref={containerRef} className="hero-trompo-outer brutal-hologram">
       <div className="hero-trompo-sticky">
         
-        {/* Filtro de Scanlines de holograma */}
+        {/* Filtro de textura vintage */}
         <div className="hologram-scanlines" />
 
-        {/* Glow de ambiente */}
+        {/* Glow de ambiente cálido */}
         <div className="brutal-glow" />
 
-        {/* Chispas Cyberpunk */}
+        {/* Chispas Cálidas (Maíz y Salsa) */}
         <div className="spark-container">
           {sparks.map((s) => (
             <div
@@ -114,7 +114,7 @@ export default function HeroTrompo() {
         {/* ════ EL TROMPO QUE SE ABRE EN PEDAZOS ════ */}
         <motion.div className="hero-trompo-image-wrap" style={{ scale: globalScale }}>
           
-          {/* Luz intensa que sale de las grietas */}
+          {/* Luz cálida que sale de las grietas */}
           <motion.div className="trompo-core-energy" style={{ scale: coreScale, opacity: coreOpacity }} />
 
           {slices.map((slice) => (
@@ -123,10 +123,10 @@ export default function HeroTrompo() {
               className={`slice-wrapper ${slice.className}`}
               style={{ y: slice.y, x: slice.x, rotateZ: slice.r }}
             >
-              {/* Imagen Base con Blend Mode Screen para desaparecer el negro */}
+              {/* Imagen Base con Blend Mode Screen */}
               <img src={trompoImg} className="slice-img slice-base" alt="" />
               
-              {/* Aberración Cromática (Glitch) */}
+              {/* Efecto cromático cálido */}
               <motion.img 
                 src={trompoImg} 
                 className="slice-img glitch-cyan" 
@@ -145,22 +145,22 @@ export default function HeroTrompo() {
           ))}
         </motion.div>
 
-        {/* ════ TEXTOS BRUTALES ════ */}
+        {/* ════ TEXTOS TACOLOGÍA ════ */}
         <div className="hero-text-layer">
           
           <motion.div className="hero-slide" style={{ opacity: t1O, y: t1Y }}>
-            <span className="hero-eyebrow">EXPERIENCIA INMERSIVA</span>
+            <span className="hero-eyebrow">LA CIENCIA DEL ANTOJO</span>
             <h1 className="hero-main-title brutal-text">
               TACO<br />
               <span className="hero-title-accent">LOGÍA</span>
             </h1>
             <p className="hero-subtitle">
-              Adéntrate en una experiencia sensorial sin precedentes. La esencia del maíz criollo deconstruida.
+              La ciencia exacta del antojo. Sabores auténticos que despiertan todos tus sentidos.
             </p>
           </motion.div>
 
           <motion.div className="hero-slide" style={{ opacity: t2O, y: t2Y }}>
-            <span className="hero-eyebrow">ROMPER LA TRADICIÓN</span>
+            <span className="hero-eyebrow">FUEGO & TRADICIÓN</span>
             <h2 className="hero-secondary-title brutal-text">
               Fuego en<br />
               <span className="hero-title-accent">expansión.</span>
@@ -171,7 +171,7 @@ export default function HeroTrompo() {
           </motion.div>
 
           <motion.div className="hero-slide" style={{ opacity: t3O, y: t3Y }}>
-            <span className="hero-eyebrow">NÚCLEO AL PASTOR</span>
+            <span className="hero-eyebrow">AL PASTOR DE AUTOR</span>
             <h2 className="hero-secondary-title brutal-text">
               Sabor al<br />
               <span className="hero-title-accent">descubierto.</span>
@@ -182,10 +182,10 @@ export default function HeroTrompo() {
           </motion.div>
 
           <motion.div className="hero-slide" style={{ opacity: t4O, y: t4Y }}>
-            <span className="hero-eyebrow">CONEXIÓN DIRECTA</span>
+            <span className="hero-eyebrow">¿LISTO PARA PROBAR?</span>
             <h2 className="hero-secondary-title brutal-text">
-              Inicia tu<br />
-              <span className="hero-title-accent">secuencia.</span>
+              Reserva tu<br />
+              <span className="hero-title-accent">experiencia.</span>
             </h2>
             <a href="#booking-section" className="hero-cta-button glitch-btn">
               Reservar una Mesa
@@ -200,7 +200,7 @@ export default function HeroTrompo() {
           className="hero-scroll-indicator"
           style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
         >
-          <span className="scroll-label">INICIAR SCROLL</span>
+          <span className="scroll-label">DESCUBRE MÁS</span>
           <div className="scroll-mouse"><div className="scroll-dot" /></div>
         </motion.div>
 

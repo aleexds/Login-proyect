@@ -1,132 +1,161 @@
-/* ════════════════════════════════════════════════
-   Admin Reservaciones - Tabla Estilizada
-   ════════════════════════════════════════════════ */
+/* ═══════════════════════════════════
+   ADMIN RESERVATIONS — Estilo Retro
+   ═══════════════════════════════════ */
 
 .admin-section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .section-header-actions {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 1rem;
 }
 
 .section-header-actions h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.3rem;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-carne);
+  margin-bottom: 0.2rem;
 }
 
 .section-header-actions p {
-  color: #9ca3af;
-  font-size: 0.9rem;
+  color: var(--color-carne-light);
+  font-size: 0.95rem;
 }
 
 .actions-right {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .admin-search-input, .admin-select {
-  background: #0f131a;
-  border: 1px solid #1f2937;
-  color: #fff;
+  background: white;
+  border: 1.5px solid rgba(89, 54, 34, 0.15);
+  color: var(--color-carne);
   padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
   outline: none;
+  font-family: var(--font-body);
 }
 
 .admin-search-input:focus, .admin-select:focus {
-  border-color: #d4af37;
+  border-color: var(--color-maiz);
 }
 
-/* ─── Table specific styling ─── */
+.admin-table-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(242, 184, 75, 0.3);
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  background: var(--color-crema);
+  color: var(--color-carne-light);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1.2rem 1rem;
+  border-bottom: 2px solid rgba(242, 184, 75, 0.3);
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(89, 54, 34, 0.1);
+  color: var(--color-carne);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tr:hover td {
+  background: rgba(242, 184, 75, 0.05);
+}
+
 .res-id {
-  color: #d4af37;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--color-carne-light);
+  font-size: 0.85rem;
 }
 
-.client-cell {
+.client-cell, .datetime-cell {
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
 }
 
 .client-name {
-  font-weight: 600;
-  color: #fff;
+  font-weight: 700;
 }
 
-.client-phone {
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
-.datetime-cell {
-  display: flex;
-  flex-direction: column;
+.client-phone, .time {
+  font-size: 0.8rem;
+  color: var(--color-carne-light);
 }
 
 .date {
-  color: #e5e7eb;
-}
-
-.time {
-  font-size: 0.75rem;
-  color: #9ca3af;
+  font-weight: 600;
 }
 
 .guests-badge {
-  display: inline-block;
-  background: #1f2937;
+  background: var(--color-crema);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.75rem;
-  color: #d1d5db;
-  margin-bottom: 0.3rem;
-}
-
-.res-notes {
-  font-size: 0.7rem;
-  color: #9ca3af;
-  max-width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 700;
+  color: var(--color-carne);
 }
 
 .zone-tag {
   font-size: 0.8rem;
-  background: rgba(212, 175, 55, 0.1);
-  color: #d4af37;
-  padding: 0.3rem 0.6rem;
-  border-radius: 12px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  font-weight: 600;
+  color: var(--color-carne-light);
 }
 
 .status-pill {
+  display: inline-flex;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
   font-size: 0.75rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  border: 1px solid transparent;
 }
 
 .status-pill.pendiente {
-  background: rgba(234, 179, 8, 0.1);
-  color: #eab308;
-  border: 1px solid rgba(234, 179, 8, 0.3);
+  background: rgba(242, 184, 75, 0.15);
+  color: #D9A23A;
+  border-color: rgba(242, 184, 75, 0.3);
 }
 
 .status-pill.confirmada {
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  background: rgba(74, 140, 63, 0.15);
+  color: var(--color-guacamole);
+  border-color: rgba(74, 140, 63, 0.3);
+}
+
+.status-pill.cancelada {
+  background: rgba(217, 56, 41, 0.15);
+  color: var(--color-salsa);
+  border-color: rgba(217, 56, 41, 0.3);
 }
 
 .table-actions {
@@ -135,32 +164,27 @@
 }
 
 .btn-icon {
+  background: transparent;
+  border: 1px solid rgba(89, 54, 34, 0.15);
+  color: var(--color-carne-light);
   width: 32px;
   height: 32px;
-  border-radius: 8px;
-  border: none;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
-  color: #fff;
-  font-weight: bold;
+  transition: all var(--transition-fast);
 }
 
-.btn-icon.approve {
-  background: #059669;
+.btn-icon.approve:hover {
+  background: rgba(74, 140, 63, 0.1);
+  color: var(--color-guacamole);
+  border-color: var(--color-guacamole);
 }
-.btn-icon.approve:hover { background: #047857; transform: scale(1.05); }
 
-.btn-icon.delete {
-  background: #dc2626;
-}
-.btn-icon.delete:hover { background: #b91c1c; transform: scale(1.05); }
-
-.table-empty {
-  text-align: center;
-  padding: 3rem !important;
-  color: #6b7280;
-  font-style: italic;
+.btn-icon.delete:hover {
+  background: rgba(217, 56, 41, 0.1);
+  color: var(--color-salsa);
+  border-color: var(--color-salsa);
 }

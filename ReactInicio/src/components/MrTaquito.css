@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════
+   MR. TAQUITO — Animaciones & Estilos
+   ═══════════════════════════════════ */
+
+/* Contenedor con flotación */
+.mr-taquito-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Animación de flotación (sube y baja suavemente) */
+.mr-taquito-float {
+  animation: mrTaquitoFloat 3s ease-in-out infinite;
+}
+
+@keyframes mrTaquitoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Imagen del personaje */
+.mr-taquito-img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(89, 54, 34, 0.12));
+}
+
+/* ─── Burbuja de Diálogo ─── */
+.speech-bubble {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: var(--color-carne, #593622);
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.7rem 1.1rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(89, 54, 34, 0.15);
+  border: 2px solid var(--color-maiz, #F2B84B);
+  z-index: 10;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  max-width: 280px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.bubble-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.bubble-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.bubble-tail {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid white;
+  filter: drop-shadow(0 2px 2px rgba(89, 54, 34, 0.08));
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .speech-bubble {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    max-width: 220px;
+  }
+}

@@ -17,14 +17,16 @@ const PublicLayout = ({ children, activeTab }) => (
       {children}
     </main>
     <footer style={{
-      background: '#0a0c0f',
-      borderTop: '1px solid #1f2532',
+      background: '#EDE8D8',
+      borderTop: '2px solid #F2B84B',
       padding: '2.5rem 1.5rem',
       textAlign: 'center',
-      color: '#6b7280',
-      fontSize: '0.85rem'
+      color: '#7A5138',
+      fontSize: '0.85rem',
+      fontFamily: "'Montserrat', sans-serif"
     }}>
-      <p>© 2026 <strong>Tacología</strong> · Restaurante de Comida Mexicana Premium.</p>
+      <p style={{ fontFamily: "'Shrikhand', cursive", fontSize: '1.1rem', color: '#593622', marginBottom: '0.4rem' }}>TACOLOGÍA</p>
+      <p>© 2026 <strong>Tacología</strong> · La ciencia exacta del antojo · Avenida Escazú, Costa Rica</p>
     </footer>
   </div>
 );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import MrTaquito from '../components/MrTaquito';
 import './Login.css';
 
 export const Login = () => {
@@ -43,27 +44,13 @@ export const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="ambient-glow"></div>
+      <div className="login-decoration" />
 
       <div className="login-card">
         <div className="login-header">
-          {/* Ilustración de Trompo de Pastor con Piña */}
-          <div className="trompo-icon-wrapper">
-            <svg className="trompo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Varilla / Espada metalica */}
-              <rect x="30" y="4" width="4" height="56" rx="2" fill="#9CA3AF" />
-              {/* Piña en la punta */}
-              <polygon points="32,6 26,14 38,14" fill="#F59E0B" />
-              {/* Carne de Trompo (capas inclinadas) */}
-              <path d="M20 18 C20 18, 32 16, 44 18 L48 26 C48 26, 32 28, 16 26 Z" fill="#EA580C" />
-              <path d="M18 27 C18 27, 32 25, 46 27 L44 36 C44 36, 32 38, 20 36 Z" fill="#F97316" />
-              <path d="M21 37 C21 37, 32 35, 43 37 L40 45 C40 45, 32 47, 24 45 Z" fill="#C2410C" />
-              <path d="M25 46 C25 46, 32 45, 39 46 L35 52 C35 52, 32 54, 29 52 Z" fill="#9A3412" />
-            </svg>
-          </div>
-
-          <h1 className="brand-title">TACOLOGÍA</h1>
-          <p className="brand-subtitle">Alta Taquería Mexicana</p>
+          <MrTaquito size={120} waving={true} showBubble={false} className="login-mascot" />
+          <h1 className="login-brand-title">TACOLOGÍA</h1>
+          <p className="login-brand-subtitle">Panel de Administración</p>
         </div>
 
         {errorMessage && <div className="error-banner">{errorMessage}</div>}
@@ -112,33 +99,18 @@ export const Login = () => {
         </form>
 
         {/* Acceso rápido de administrador */}
-        <div style={{ marginTop: '1.5rem', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <p style={{ color: '#9ca3af', fontSize: '0.78rem', textAlign: 'center', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Acceso Autorizado:
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <button 
-              type="button"
-              onClick={() => handleQuickLogin('admin@tacologia.com', '1234')}
-              style={{
-                background: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.4)',
-                color: '#d4af37',
-                padding: '0.65rem 1.2rem',
-                borderRadius: '6px',
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                fontWeight: '700',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem'
-              }}
-            >
-              👑 Rellenar Credenciales de Administrador
-            </button>
-          </div>
+        <div className="quick-access-section">
+          <p className="quick-access-label">Acceso Autorizado:</p>
+          <button 
+            type="button"
+            onClick={() => handleQuickLogin('admin@tacologia.com', '1234')}
+            className="quick-access-btn"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2 L15.09 8.26 L22 9.27 L17 14.14 L18.18 21.02 L12 17.77 L5.82 21.02 L7 14.14 L2 9.27 L8.91 8.26Z" fill="#F2B84B" stroke="#D9A23A" strokeWidth="1"/>
+            </svg>
+            Rellenar Credenciales de Administrador
+          </button>
         </div>
       </div>
     </div>

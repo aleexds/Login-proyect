@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import mrTaquitoImg from '../assets/mr-taquito-face.png';
 import './Navbar.css';
 
 export default function Navbar({ activeTab }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -16,28 +18,36 @@ export default function Navbar({ activeTab }) {
     <header className="navbar-header">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          <span className="material-symbols-outlined" style={{ fontSize: '2rem', color: '#f57c00' }}>
-            restaurant
-          </span>
+          <img src={mrTaquitoImg} alt="Mr. Taquito Logo" className="brand-taco-icon" draggable="false" />
           <div className="brand-text">
             <span className="brand-title">TACOLOGÍA</span>
-            <span className="brand-subtitle">Cocina Mexicana de Autor</span>
+            <span className="brand-subtitle">La ciencia exacta del antojo</span>
           </div>
         </Link>
 
-        <nav className="navbar-nav">
+        {/* Mobile toggle */}
+        <button className="mobile-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menú">
+          <span className={`hamburger ${mobileOpen ? 'open' : ''}`}></span>
+        </button>
+
+        <nav className={`navbar-nav ${mobileOpen ? 'nav-open' : ''}`}>
           <Link 
             to="/" 
             className={`nav-link ${activeTab === 'home' ? 'active' : ''}`}
-            onClick={user ? handleLogout : undefined}
+            onClick={() => { setMobileOpen(false); if (user) handleLogout(); }}
           >
             Inicio
           </Link>
           
-          <a 
-            href="/#booking-section" 
-            className="nav-link"
-          >
+          <a href="/#menu-section" className="nav-link" onClick={() => setMobileOpen(false)}>
+            Menú
+          </a>
+
+          <a href="/#manifiesto-section" className="nav-link" onClick={() => setMobileOpen(false)}>
+            Manifiesto
+          </a>
+
+          <a href="/#booking-section" className="nav-link" onClick={() => setMobileOpen(false)}>
             Reservar
           </a>
 
@@ -46,6 +56,7 @@ export default function Navbar({ activeTab }) {
               <Link 
                 to="/admin" 
                 className={`nav-link admin-badge ${activeTab === 'admin' ? 'active' : ''}`}
+                onClick={() => setMobileOpen(false)}
               >
                 Panel Admin
               </Link>
@@ -63,16 +74,10 @@ export default function Navbar({ activeTab }) {
             </>
           ) : (
             <div className="nav-auth-buttons">
-              <Link 
-                to="/login" 
-                className="btn-login"
-              >
+              <Link to="/login" className="btn-login" onClick={() => setMobileOpen(false)}>
                 Acceso Admin
               </Link>
-              <a 
-                href="/#booking-section" 
-                className="btn-reserve-cta"
-              >
+              <a href="/#booking-section" className="btn-reserve-cta" onClick={() => setMobileOpen(false)}>
                 Reservar Mesa
               </a>
             </div>
