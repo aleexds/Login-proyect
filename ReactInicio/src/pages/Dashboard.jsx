@@ -29,7 +29,9 @@ export default function Dashboard({ currentUser, reservations = [], onCancelRese
           
           {userReservations.length === 0 ? (
             <div className="empty-state">
-              <span className="empty-icon">📅</span>
+              <span className="material-symbols-outlined empty-icon" style={{ fontSize: '2.5rem', color: '#d4af37' }}>
+                calendar_month
+              </span>
               <p>No tienes reservaciones activas en este momento.</p>
             </div>
           ) : (
@@ -57,8 +59,8 @@ export default function Dashboard({ currentUser, reservations = [], onCancelRese
                       <span className="detail-value">{res.guests} personas</span>
                     </div>
                     <div className="detail-box">
-                      <span className="detail-label">Zona</span>
-                      <span className="detail-value">{res.tableArea || 'Terraza Agave'}</span>
+                      <span className="detail-label">Mesa / Zona</span>
+                      <span className="detail-value">{res.tableArea || 'Terraza Volcán'}</span>
                     </div>
                   </div>
 
@@ -85,12 +87,19 @@ export default function Dashboard({ currentUser, reservations = [], onCancelRese
         {/* Sidebar info */}
         <div className="dashboard-sidebar">
           <div className="info-box">
-            <h3>Política del Restaurante</h3>
-            <p>Se otorga una tolerancia máxima de 15 minutos en mesa. En caso de retraso, contáctanos directamente a concierge.</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
+              <span className="material-symbols-outlined" style={{ color: '#d4af37' }}>info</span>
+              <h3 style={{ margin: 0 }}>Tacología Costa Rica</h3>
+            </div>
+            <p>
+              Ubicados en <strong>Avenida Escazú, San José, Costa Rica</strong>. Toda nuestra alta cocina de autor cuenta con ingredientes seleccionados y precios en <strong>Colones Costarricenses (₡ CRC)</strong> con impuestos incluidos.
+            </p>
             <ul>
-              <li>Código de vestir: Smart Casual</li>
-              <li>Valet Parking de cortesía</li>
-              <li>Cata de mezcales bajo solicitud previa</li>
+              <li>Tolerancia máxima de 15 minutos en mesa.</li>
+              <li>Código de vestimenta: Smart Casual.</li>
+              <li>Servicio de Valet Parking de cortesía.</li>
+              <li>Cata de mezcales artesanales y destilados.</li>
+              <li>Teléfono Concierge: +506 2288-TACO (8226)</li>
             </ul>
           </div>
         </div>

@@ -67,12 +67,12 @@ export default function AdminMenu({ menu, onAddMenuItem }) {
                 </select>
               </div>
               <div className="form-group">
-                <label>Precio (MXN)</label>
+                <label>Precio (CRC ₡)</label>
                 <input 
                   type="number" 
                   value={newDish.price}
                   onChange={(e) => setNewDish({...newDish, price: e.target.value})}
-                  placeholder="250"
+                  placeholder="6500"
                   required 
                 />
               </div>
@@ -84,7 +84,7 @@ export default function AdminMenu({ menu, onAddMenuItem }) {
                 rows="3"
                 value={newDish.description}
                 onChange={(e) => setNewDish({...newDish, description: e.target.value})}
-                placeholder="Ingredientes clave y notas..."
+                placeholder="Ingredientes clave, denominación de origen y notas..."
               />
             </div>
 
@@ -104,7 +104,7 @@ export default function AdminMenu({ menu, onAddMenuItem }) {
                   <span className="dish-cat">{dish.category}</span>
                 </div>
                 <div className="dish-meta">
-                  <span className="dish-price">${dish.price}</span>
+                  <span className="dish-price">₡{Number(dish.price).toLocaleString('es-CR')}</span>
                   {dish.badge && <span className="dish-badge">{dish.badge}</span>}
                 </div>
               </div>

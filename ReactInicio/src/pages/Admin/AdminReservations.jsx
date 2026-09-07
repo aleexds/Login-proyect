@@ -73,10 +73,13 @@ export default function AdminReservations({ reservations, onUpdateStatus, onDele
                     </div>
                   </td>
                   <td>
-                    <span className="guests-badge">👤 {res.guests}</span>
+                    <span className="guests-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>person</span>
+                      {res.guests}
+                    </span>
                     {res.notes && <p className="res-notes" title={res.notes}>{res.notes}</p>}
                   </td>
-                  <td><span className="zone-tag">{res.tableArea || 'Principal'}</span></td>
+                  <td><span className="zone-tag">{res.tableArea || 'Terraza Volcán'}</span></td>
                   <td>
                     <span className={`status-pill ${res.status}`}>
                       {res.status}
@@ -89,13 +92,19 @@ export default function AdminReservations({ reservations, onUpdateStatus, onDele
                           className="btn-icon approve"
                           title="Confirmar"
                           onClick={() => onUpdateStatus(res.id, 'confirmada')}
-                        >✓</button>
+                          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>done</span>
+                        </button>
                       )}
                       <button 
                         className="btn-icon delete"
                         title="Eliminar"
                         onClick={() => onDeleteReservation(res.id)}
-                      >✕</button>
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      >
+                        <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>close</span>
+                      </button>
                     </div>
                   </td>
                 </tr>

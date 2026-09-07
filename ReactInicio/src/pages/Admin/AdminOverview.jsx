@@ -19,7 +19,9 @@ export default function AdminOverview({ reservations = [], menu = [] }) {
 
       <div className="kpi-grid">
         <div className="kpi-card">
-          <div className="kpi-icon pending">⏳</div>
+          <div className="kpi-icon pending">
+            <span className="material-symbols-outlined">hourglass_top</span>
+          </div>
           <div className="kpi-info">
             <h3>Reservas Pendientes</h3>
             <p className="kpi-value">{pendingReservations}</p>
@@ -27,7 +29,9 @@ export default function AdminOverview({ reservations = [], menu = [] }) {
         </div>
         
         <div className="kpi-card">
-          <div className="kpi-icon confirmed">✅</div>
+          <div className="kpi-icon confirmed">
+            <span className="material-symbols-outlined">check_circle</span>
+          </div>
           <div className="kpi-info">
             <h3>Reservas Confirmadas</h3>
             <p className="kpi-value">{confirmedReservations}</p>
@@ -35,18 +39,22 @@ export default function AdminOverview({ reservations = [], menu = [] }) {
         </div>
 
         <div className="kpi-card">
-          <div className="kpi-icon highlight">🌮</div>
+          <div className="kpi-icon highlight">
+            <span className="material-symbols-outlined">star</span>
+          </div>
           <div className="kpi-info">
             <h3>Platillo Estrella</h3>
-            <p className="kpi-value text-small">{popularDish?.name}</p>
+            <p className="kpi-value text-small">{popularDish?.name || 'Taco de Rib Eye'}</p>
           </div>
         </div>
 
         <div className="kpi-card">
-          <div className="kpi-icon revenue">💰</div>
+          <div className="kpi-icon revenue">
+            <span className="material-symbols-outlined">payments</span>
+          </div>
           <div className="kpi-info">
             <h3>Ingresos Proyectados</h3>
-            <p className="kpi-value">$24,500 MXN</p>
+            <p className="kpi-value">₡785.000 CRC</p>
           </div>
         </div>
       </div>

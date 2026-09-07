@@ -65,7 +65,7 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
               <div className="dish-body">
                 <div className="dish-top">
                   <h3 className="dish-name">{dish.name}</h3>
-                  <span className="dish-price">${dish.price} MXN</span>
+                  <span className="dish-price">₡{Number(dish.price).toLocaleString('es-CR')} CRC</span>
                 </div>
                 <p className="dish-desc">{dish.description}</p>
                 <div className="dish-footer">
@@ -81,23 +81,22 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
       <section id="booking-section" className="booking-section">
         <div className="booking-wrapper">
           <div className="booking-info">
-            <span className="section-subtitle">EXPERIENCIA PRIVADA</span>
+            <span className="section-subtitle">EXPERIENCIA PRIVADA · COSTA RICA</span>
             <h2 className="section-title">Reserva tu Experiencia</h2>
             <p className="booking-text">
-              Garantiza tu lugar en nuestro salón principal, cava de mezcales o terraza al aire libre. 
-              Ideal para celebraciones memorables y veladas de alta cocina.
+              Garantiza tu lugar en nuestra sede en <strong>Avenida Escazú, Costa Rica</strong>. Salón principal, cava privada de mezcales y terraza al aire libre.
             </p>
             <div className="perks-list">
               <div className="perk-item">
-                <span className="perk-icon">✦</span>
+                <span className="material-symbols-outlined" style={{ color: '#d4af37', fontSize: '1.2rem' }}>star</span>
                 <div>
-                  <strong>Mesas Exclusivas:</strong> Servicio personalizado de sommelier de agaves.
+                  <strong>Alta Gastronomía:</strong> Sabores mexicanos auténticos con ingredientes de primera.
                 </div>
               </div>
               <div className="perk-item">
-                <span className="perk-icon">✦</span>
+                <span className="material-symbols-outlined" style={{ color: '#d4af37', fontSize: '1.2rem' }}>payments</span>
                 <div>
-                  <strong>Control de Reserva:</strong> Puedes consultar o actualizar tu estatus desde tu cuenta.
+                  <strong>Precios Transparentes:</strong> Todos los valores expresados en Colones Costarricenses (₡ CRC).
                 </div>
               </div>
             </div>
@@ -111,7 +110,7 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
                 <label>Nombre y Apellidos</label>
                 <input 
                   type="text" 
-                  placeholder="Ej. Sofía Valenzuela"
+                  placeholder="Ej. Juan Carlos Morales"
                   value={reserveForm.name}
                   onChange={(e) => setReserveForm({...reserveForm, name: e.target.value})}
                   required
@@ -120,10 +119,10 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Teléfono de Contacto</label>
+                  <label>Teléfono (Costa Rica)</label>
                   <input 
                     type="tel" 
-                    placeholder="+52 55 ..."
+                    placeholder="+506 8888 9999"
                     value={reserveForm.phone}
                     onChange={(e) => setReserveForm({...reserveForm, phone: e.target.value})}
                     required
@@ -160,7 +159,7 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
                     value={reserveForm.time}
                     onChange={(e) => setReserveForm({...reserveForm, time: e.target.value})}
                   >
-                    <option value="14:00">14:00 hrs (Comida)</option>
+                    <option value="14:00">14:00 hrs (Almuerzo)</option>
                     <option value="16:00">16:00 hrs</option>
                     <option value="19:00">19:00 hrs (Cena)</option>
                     <option value="20:30">20:30 hrs</option>
@@ -175,9 +174,9 @@ export default function Home({ onNavigate, menu = [], onQuickReserve }) {
                   value={reserveForm.tableArea}
                   onChange={(e) => setReserveForm({...reserveForm, tableArea: e.target.value})}
                 >
-                  <option value="Terraza Agave">Terraza Agave (Exterior con vista)</option>
-                  <option value="Salón Mezcal">Salón Mezcal (Íntimo & Cava)</option>
-                  <option value="Barra Oaxaqueña">Barra del Chef Taquero</option>
+                  <option value="Terraza Volcán">Terraza Volcán (Exterior con vista)</option>
+                  <option value="Salón Mezcal Escazú">Salón Mezcal Escazú (Íntimo & Cava)</option>
+                  <option value="Barra Central del Chef">Barra Central del Chef Taquero</option>
                 </select>
               </div>
 

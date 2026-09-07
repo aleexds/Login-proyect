@@ -16,7 +16,9 @@ export default function Navbar({ activeTab }) {
     <header className="navbar-header">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          <span className="brand-icon">🌮</span>
+          <span className="material-symbols-outlined" style={{ fontSize: '2rem', color: '#f57c00' }}>
+            restaurant
+          </span>
           <div className="brand-text">
             <span className="brand-title">TACOLOGÍA</span>
             <span className="brand-subtitle">Cocina Mexicana de Autor</span>

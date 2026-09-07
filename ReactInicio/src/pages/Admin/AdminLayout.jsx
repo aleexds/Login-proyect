@@ -38,7 +38,9 @@ export default function AdminLayout({
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-brand">
-          <span className="brand-icon">🌮</span>
+          <span className="material-symbols-outlined" style={{ color: '#d4af37', fontSize: '1.8rem' }}>
+            restaurant
+          </span>
           <span className="brand-text">Tacología <strong>Admin</strong></span>
         </div>
 
@@ -47,13 +49,15 @@ export default function AdminLayout({
             className={`admin-nav-item ${activeSection === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveSection('overview')}
           >
-            📊 Resumen
+            <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>analytics</span>
+            Resumen
           </button>
           <button 
             className={`admin-nav-item ${activeSection === 'reservations' ? 'active' : ''}`}
             onClick={() => setActiveSection('reservations')}
           >
-            📅 Reservaciones
+            <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>table_restaurant</span>
+            Reservaciones
             {reservations.filter(r => r.status === 'pendiente').length > 0 && (
               <span className="nav-badge">
                 {reservations.filter(r => r.status === 'pendiente').length}
@@ -64,20 +68,23 @@ export default function AdminLayout({
             className={`admin-nav-item ${activeSection === 'menu' ? 'active' : ''}`}
             onClick={() => setActiveSection('menu')}
           >
-            🧾 Menú Digital
+            <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>menu_book</span>
+            Menú Digital
           </button>
         </nav>
 
         <div className="admin-sidebar-footer" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <button className="btn-exit-admin" onClick={onGoToWebsite}>
-            ← Volver al Sitio
+          <button className="btn-exit-admin" onClick={onGoToWebsite} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>arrow_back</span>
+            Volver al Sitio
           </button>
           <button 
             className="btn-exit-admin" 
-            style={{ borderColor: 'rgba(239, 68, 68, 0.4)', color: '#fca5a5' }} 
+            style={{ borderColor: 'rgba(239, 68, 68, 0.4)', color: '#fca5a5', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }} 
             onClick={onLogout}
           >
-            ⎋ Cerrar Sesión
+            <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>logout</span>
+            Cerrar Sesión
           </button>
         </div>
       </aside>
