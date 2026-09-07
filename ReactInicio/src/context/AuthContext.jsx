@@ -5,14 +5,20 @@ const AuthContext = createContext();
 
 // 2. Componente Proveedor (envuelve la app)
 export const AuthProvider = ({ children }) => {
-  // El usuario vive SOLO en la memoria del estado de React
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem('tacologia_user');
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+      return null;
+    }
+  });
 
   // Función para validar contra db.json
   const login = async (email, password) => {
     try {
       // Petición a JSON Server filtrando credenciales
-      const response = await fetch(`http://localhost:3000/users?email=${email}&password=${password}`);
+      const response = await fetch(`http://localhost:3000/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
       
       if (!response.ok) {
         throw new Error('Error al conectar con el backend simulado.');
@@ -24,15 +30,17 @@ export const AuthProvider = ({ children }) => {
       if (users.length > 0) {
         const loggedUser = users[0];
         
-        // Guardamos los datos del usuario en el estado global
-        setUser({
+        const userData = {
           id: loggedUser.id,
           name: loggedUser.name,
           email: loggedUser.email,
           role: loggedUser.role,
-        });
+        };
 
-        return { success: true };
+        setUser(userData);
+        localStorage.setItem('tacologia_user', JSON.stringify(userData));
+
+        return { success: true, user: userData };
       } else {
         return { success: false, message: 'Correo o contraseña incorrectos.' };
       }
@@ -42,9 +50,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función para cerrar sesión (simplemente borra el estado)
+  // Función para cerrar sesión
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('tacologia_user');
   };
 
   return (

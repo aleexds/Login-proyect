@@ -1,11 +1,15 @@
 import React from 'react';
+import { useAuth } from '../context/AuthContext';
 import './Dashboard.css';
 
 export default function Dashboard({ currentUser, reservations = [], onCancelReservation }) {
+  const { user: authUser } = useAuth();
+  const effectiveUser = currentUser || authUser;
+
   // Filtrar reservaciones que correspondan al usuario si es rol user
-  const userReservations = currentUser?.role === 'admin' 
+  const userReservations = effectiveUser?.role === 'admin' 
     ? reservations 
-    : reservations.filter((r) => r.userId === currentUser?.id || !r.userId);
+    : reservations.filter((r) => String(r.userId) === String(effectiveUser?.id) || !r.userId);
 
   return (
     <div className="dashboard-page">

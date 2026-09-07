@@ -1,76 +1,86 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
-export default function Navbar({ currentUser, onLogout, activeTab, setActiveTab }) {
+export default function Navbar({ activeTab }) {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <header className="navbar-header">
       <div className="navbar-container">
-        <div className="navbar-brand" onClick={() => setActiveTab && setActiveTab('home')}>
+        <Link to="/" className="navbar-brand">
           <span className="brand-icon">🌮</span>
           <div className="brand-text">
             <span className="brand-title">TACOLOGÍA</span>
             <span className="brand-subtitle">Cocina Mexicana de Autor</span>
           </div>
-        </div>
+        </Link>
 
         <nav className="navbar-nav">
-          <button 
+          <Link 
+            to="/" 
             className={`nav-link ${activeTab === 'home' ? 'active' : ''}`}
-            onClick={() => setActiveTab && setActiveTab('home')}
           >
             Inicio
-          </button>
+          </Link>
           
-          <button 
-            className={`nav-link ${activeTab === 'menu' ? 'active' : ''}`}
-            onClick={() => setActiveTab && setActiveTab('menu')}
+          <a 
+            href="/#booking-section" 
+            className="nav-link"
           >
-            Menú Exclusivo
-          </button>
+            Reservar
+          </a>
 
-          {currentUser ? (
+          {user ? (
             <>
-              <button 
+              <Link 
+                to="/dashboard" 
                 className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`}
-                onClick={() => setActiveTab && setActiveTab('dashboard')}
               >
                 Mis Reservas
-              </button>
+              </Link>
 
-              {currentUser.role === 'admin' && (
-                <button 
+              {user.role === 'admin' && (
+                <Link 
+                  to="/admin" 
                   className={`nav-link admin-badge ${activeTab === 'admin' ? 'active' : ''}`}
-                  onClick={() => setActiveTab && setActiveTab('admin')}
                 >
                   Panel Admin
-                </button>
+                </Link>
               )}
 
               <div className="user-profile-badge">
-                <span className="user-avatar">{currentUser.name.charAt(0)}</span>
+                <span className="user-avatar">{user.name ? user.name.charAt(0).toUpperCase() : 'U'}</span>
                 <div className="user-info-text">
-                  <span className="user-name">{currentUser.name}</span>
-                  <span className="user-role-label">{currentUser.role === 'admin' ? 'Administrador' : 'Cliente'}</span>
+                  <span className="user-name">{user.name}</span>
+                  <span className="user-role-label">{user.role === 'admin' ? 'Administrador' : 'Cliente'}</span>
                 </div>
-                <button className="btn-logout" onClick={onLogout} title="Cerrar sesión">
+                <button className="btn-logout" onClick={handleLogout} title="Cerrar sesión">
                   Salir
                 </button>
               </div>
             </>
           ) : (
             <div className="nav-auth-buttons">
-              <button 
+              <Link 
+                to="/login" 
                 className="btn-login"
-                onClick={() => setActiveTab && setActiveTab('login')}
               >
                 Iniciar Sesión
-              </button>
-              <button 
+              </Link>
+              <a 
+                href="/#booking-section" 
                 className="btn-reserve-cta"
-                onClick={() => setActiveTab && setActiveTab('home')}
               >
                 Reservar Mesa
-              </button>
+              </a>
             </div>
           )}
         </nav>

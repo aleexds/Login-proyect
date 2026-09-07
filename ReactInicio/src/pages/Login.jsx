@@ -26,10 +26,19 @@ export const Login = () => {
     setIsSubmitting(false);
 
     if (result.success) {
-      navigate('/dashboard');
+      if (result.user?.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       setErrorMessage(result.message);
     }
+  };
+
+  const handleQuickLogin = (quickEmail, quickPassword) => {
+    setEmail(quickEmail);
+    setPassword(quickPassword);
   };
 
   return (
@@ -101,6 +110,47 @@ export const Login = () => {
             )}
           </button>
         </form>
+
+        {/* Acceso rápido de demostración */}
+        <div style={{ marginTop: '1.5rem', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <p style={{ color: '#9ca3af', fontSize: '0.78rem', textAlign: 'center', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Accesos de prueba rápidos:
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+            <button 
+              type="button"
+              onClick={() => handleQuickLogin('admin@tacologia.com', '1234')}
+              style={{
+                background: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.4)',
+                color: '#d4af37',
+                padding: '0.55rem',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                fontWeight: '600'
+              }}
+            >
+              👑 Admin Demo
+            </button>
+            <button 
+              type="button"
+              onClick={() => handleQuickLogin('user@tacologia.com', '1234')}
+              style={{
+                background: 'rgba(234, 88, 12, 0.12)',
+                border: '1px solid rgba(234, 88, 12, 0.4)',
+                color: '#ea580c',
+                padding: '0.55rem',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                fontWeight: '600'
+              }}
+            >
+              👤 Cliente Demo
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,18 +1,17 @@
-import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../context/useAuth'
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function RutaProtegida({ children, allowedRoles = [] }) {
-  const { user, isAuthenticated, role } = useAuth()
-  const location = useLocation()
-  const currentRole = role ?? user?.role
+  const { user } = useAuth();
+  const location = useLocation();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location }} />
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(currentRole)) {
-    return <Navigate to="/acceso-denegado" replace />
+  if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/dashboard" replace />;
   }
 
-  return children
+  return children;
 }

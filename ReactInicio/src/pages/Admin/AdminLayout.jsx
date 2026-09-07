@@ -68,9 +68,16 @@ export default function AdminLayout({
           </button>
         </nav>
 
-        <div className="admin-sidebar-footer">
+        <div className="admin-sidebar-footer" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <button className="btn-exit-admin" onClick={onGoToWebsite}>
             ← Volver al Sitio
+          </button>
+          <button 
+            className="btn-exit-admin" 
+            style={{ borderColor: 'rgba(239, 68, 68, 0.4)', color: '#fca5a5' }} 
+            onClick={onLogout}
+          >
+            ⎋ Cerrar Sesión
           </button>
         </div>
       </aside>
