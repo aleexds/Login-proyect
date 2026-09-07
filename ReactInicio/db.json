@@ -6,13 +6,6 @@
       "email": "admin@tacologia.com",
       "password": "1234",
       "role": "admin"
-    },
-    {
-      "id": "2",
-      "name": "Cliente Demo",
-      "email": "user@tacologia.com",
-      "password": "1234",
-      "role": "user"
     }
   ],
   "reservations": [

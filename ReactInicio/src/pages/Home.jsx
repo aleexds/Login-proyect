@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeroTrompo from '../components/HeroTrompo';
+import { useAuth } from '../context/AuthContext';
 import './Home.css';
 
 export default function Home({ onNavigate, menu = [], onQuickReserve }) {
+  const { logout, user } = useAuth();
+
+  // Por seguridad: cada vez que se devuelve a la página inicial se cierra la sesión
+  useEffect(() => {
+    if (user) {
+      logout();
+    }
+  }, []);
+
   const [reserveForm, setReserveForm] = useState({
     name: '',
     phone: '',

@@ -111,12 +111,12 @@ export const Login = () => {
           </button>
         </form>
 
-        {/* Acceso rápido de demostración */}
+        {/* Acceso rápido de administrador */}
         <div style={{ marginTop: '1.5rem', paddingTop: '1.2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <p style={{ color: '#9ca3af', fontSize: '0.78rem', textAlign: 'center', marginBottom: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Accesos de prueba rápidos:
+            Acceso Autorizado:
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button 
               type="button"
               onClick={() => handleQuickLogin('admin@tacologia.com', '1234')}
@@ -124,30 +124,19 @@ export const Login = () => {
                 background: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.4)',
                 color: '#d4af37',
-                padding: '0.55rem',
+                padding: '0.65rem 1.2rem',
                 borderRadius: '6px',
-                fontSize: '0.75rem',
+                fontSize: '0.8rem',
                 cursor: 'pointer',
-                fontWeight: '600'
+                fontWeight: '700',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem'
               }}
             >
-              👑 Admin Demo
-            </button>
-            <button 
-              type="button"
-              onClick={() => handleQuickLogin('user@tacologia.com', '1234')}
-              style={{
-                background: 'rgba(234, 88, 12, 0.12)',
-                border: '1px solid rgba(234, 88, 12, 0.4)',
-                color: '#ea580c',
-                padding: '0.55rem',
-                borderRadius: '6px',
-                fontSize: '0.75rem',
-                cursor: 'pointer',
-                fontWeight: '600'
-              }}
-            >
-              👤 Cliente Demo
+              👑 Rellenar Credenciales de Administrador
             </button>
           </div>
         </div>

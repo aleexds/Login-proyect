@@ -27,6 +27,7 @@ export default function Navbar({ activeTab }) {
           <Link 
             to="/" 
             className={`nav-link ${activeTab === 'home' ? 'active' : ''}`}
+            onClick={user ? handleLogout : undefined}
           >
             Inicio
           </Link>
@@ -38,29 +39,20 @@ export default function Navbar({ activeTab }) {
             Reservar
           </a>
 
-          {user ? (
+          {user?.role === 'admin' ? (
             <>
               <Link 
-                to="/dashboard" 
-                className={`nav-link ${activeTab === 'dashboard' ? 'active' : ''}`}
+                to="/admin" 
+                className={`nav-link admin-badge ${activeTab === 'admin' ? 'active' : ''}`}
               >
-                Mis Reservas
+                Panel Admin
               </Link>
 
-              {user.role === 'admin' && (
-                <Link 
-                  to="/admin" 
-                  className={`nav-link admin-badge ${activeTab === 'admin' ? 'active' : ''}`}
-                >
-                  Panel Admin
-                </Link>
-              )}
-
               <div className="user-profile-badge">
-                <span className="user-avatar">{user.name ? user.name.charAt(0).toUpperCase() : 'U'}</span>
+                <span className="user-avatar">{user.name ? user.name.charAt(0).toUpperCase() : 'A'}</span>
                 <div className="user-info-text">
                   <span className="user-name">{user.name}</span>
-                  <span className="user-role-label">{user.role === 'admin' ? 'Administrador' : 'Cliente'}</span>
+                  <span className="user-role-label">Administrador</span>
                 </div>
                 <button className="btn-logout" onClick={handleLogout} title="Cerrar sesión">
                   Salir
@@ -73,7 +65,7 @@ export default function Navbar({ activeTab }) {
                 to="/login" 
                 className="btn-login"
               >
-                Iniciar Sesión
+                Acceso Admin
               </Link>
               <a 
                 href="/#booking-section" 

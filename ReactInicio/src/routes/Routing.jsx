@@ -46,7 +46,10 @@ const AdminRoute = ({ menu, reservations, onUpdateStatus, onDeleteReservation, o
         logout();
         navigate('/login');
       }}
-      onGoToWebsite={() => navigate('/')}
+      onGoToWebsite={() => {
+        logout();
+        navigate('/');
+      }}
     />
   );
 };
